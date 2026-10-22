@@ -108,6 +108,20 @@
     addEventListener("keydown", function () { end(true); }, { once: true });
   }
 
+  /* ---------- hero video: the right size for the screen, paused when out of view ---------- */
+  var vid = $("#hero-video");
+  if (vid && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    vid.src = innerWidth < 760 ? vid.dataset.srcSm : vid.dataset.srcLg;
+    vid.addEventListener("playing", function () { vid.classList.add("ready"); }, { once: true });
+    var tryPlay = function () { var p = vid.play(); if (p && p.catch) p.catch(function () {}); };
+    tryPlay();
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (es) {
+        if (es[0].isIntersecting) tryPlay(); else vid.pause();
+      }).observe(vid);
+    }
+  }
+
   /* ---------- header ---------- */
   var head = $(".site-head");
   var mbar = $(".mbar");
@@ -197,23 +211,34 @@
     else if (mode === "weeks") rows = Math.min(state.weeks + 1, 5);
     else rows = 4;
 
+    // real dates, starting the coming Monday
+    var start = new Date(); start.setHours(0, 0, 0, 0);
+    start.setDate(start.getDate() + ((8 - start.getDay()) % 7 || 7));
+    var icons = $$(".svc-picks input:checked").map(function (i) {
+      return i.closest(".svc").querySelector("use").getAttribute("href");
+    }).slice(0, 2);
+    var iconHtml = icons.map(function (h) { return '<svg class="ico"><use href="' + h + '"/></svg>'; }).join("");
+    var last = new Date(start);
     for (var w = 0; w < rows; w++) {
       var cls = "cal-week";
       if (mode === "ongoing" && w === rows - 1) cls += " fade";
       html += '<div class="' + cls + '">';
       for (var d = 0; d < 7; d++) {
-        var c = "cal-day";
+        var c = "cal-day", inner = "";
+        var dt = new Date(start); dt.setDate(start.getDate() + w * 7 + d); last = dt;
         if (mode === "once") {
-          if (w === 0 && d === 2) c += " pick";
+          if (w === 0 && d === 2) { c += " pick v"; inner = iconHtml; }
         } else if (mode === "weeks" && w >= state.weeks) {
           c += " off";
         } else if (days.indexOf(d) > -1) {
-          c += " v";
+          c += " v"; inner = iconHtml;
         }
-        html += '<span class="' + c + '" title="' + DAY[d] + '"><i></i></span>';
+        html += '<span class="' + c + '" title="' + dt.toDateString() + '"><em>' + dt.getDate() + "</em>" + inner + "</span>";
       }
       html += "</div>";
     }
+    var fmt = function (x) { return x.toLocaleDateString("en-US", { month: "short", day: "numeric" }); };
+    $("#sheet-month").textContent = fmt(start) + " \u2013 " + fmt(last);
     cal.innerHTML = html;
     // let the dots scale in
     requestAnimationFrame(function () { cal.classList.add("ready"); });

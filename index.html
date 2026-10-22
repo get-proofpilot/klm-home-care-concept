@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,400..800,100;1,9..144,400..700,100&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script>document.documentElement.classList.add("js");try{if(/[?&]nointro/.test(location.search))sessionStorage.setItem("klm_intro","1");if(matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("intro-seen")}catch(e){}setTimeout(function(){document.documentElement.classList.add("hero-go")},5200)</script>
-<link rel="stylesheet" href="assets/site.css?v=11">
+<link rel="stylesheet" href="assets/site.css?v=14">
 </head>
 <body>
 
@@ -78,6 +78,10 @@
 
 <!-- HERO -->
 <section class="hero">
+  <div class="hero-stage">
+  <div class="hero-media" aria-hidden="true">
+    <video id="hero-video" muted playsinline loop preload="metadata" poster="assets/img/hero-poster.webp" data-src-sm="assets/video/hero-960.mp4" data-src-lg="assets/video/hero-1600.mp4"></video>
+  </div>
   <div class="wrap hero-grid">
     <div class="hero-copy">
       <p class="eyebrow">In-home bathing &amp; personal care in the East Valley</p>
@@ -109,6 +113,9 @@
       </div>
       <p class="note-chip"><svg class="ico"><use href="#i-home"/></svg>Your bathroom, your products, your routine.</p>
     </div>
+  </div>
+
+  <div class="brush-edge" aria-hidden="true"></div>
   </div>
 
   <dl class="wrap hero-facts">
@@ -176,6 +183,7 @@
 
 <!-- PLANNER -->
 <section class="plan" id="plan">
+  <div class="edge edge-top" style="--edge:var(--ground)" aria-hidden="true"></div>
   <div class="wrap">
     <div class="plan-head">
       <p class="eyebrow eyebrow-light">Plan your visits</p>
@@ -183,38 +191,25 @@
       <p>Sketch what you think you need. We fine-tune it together at your free consult, and it can change any time after.</p>
     </div>
 
-    <div class="planner">
+    <div class="planner" data-mode="weeks">
       <div class="pl-modes" role="tablist" aria-label="How long do you need help">
-        <button role="tab" class="pl-mode" data-mode="once" aria-selected="false"><span>Just once</span></button>
-        <button role="tab" class="pl-mode" data-mode="weeks" aria-selected="true"><span>A few weeks</span></button>
-        <button role="tab" class="pl-mode" data-mode="ongoing" aria-selected="false"><span>For the long run</span></button>
+        <button role="tab" class="pl-mode" data-mode="once" aria-selected="false">
+          <span class="pm-img"><img src="assets/img/once-pink-900.webp" width="900" height="720" alt="" loading="lazy"></span>
+          <span class="pm-body"><span class="pm-tag">Just once</span><b>Just a bath. Really.</b><small>Before a family event, a big appointment, or the week your usual helper is away.</small></span>
+        </button>
+        <button role="tab" class="pl-mode" data-mode="weeks" aria-selected="true">
+          <span class="pm-img"><img src="assets/img/short-crutch-900.webp" width="900" height="600" alt="" loading="lazy"></span>
+          <span class="pm-body"><span class="pm-tag">A few weeks</span><b>Back on your feet.</b><small>After a surgery, a fall or a hospital stay, we cover the weeks until showering alone is safe again.</small></span>
+        </button>
+        <button role="tab" class="pl-mode" data-mode="ongoing" aria-selected="false">
+          <span class="pm-img"><img src="assets/img/long-family-900.webp" width="900" height="507" alt="" loading="lazy"></span>
+          <span class="pm-body"><span class="pm-tag">For the long run</span><b>A standing appointment.</b><small>A steady routine on the days you choose, with a caregiver matched to you.</small></span>
+        </button>
       </div>
 
-      <div class="pl-grid">
-        <figure class="pl-story">
-          <div class="pl-photo">
-            <img data-mode-img="once" src="assets/img/once-pink-900.webp" width="900" height="720" alt="A stack of fresh hot-pink bath towels" loading="lazy">
-            <img data-mode-img="weeks" src="assets/img/short-crutch-900.webp" width="900" height="600" alt="A person in a pink shirt walking with a forearm crutch" loading="lazy">
-            <img data-mode-img="ongoing" src="assets/img/long-family-900.webp" width="900" height="507" alt="A mother and her son laughing together on the couch at home" loading="lazy">
-          </div>
-          <figcaption>
-            <div data-mode-copy="once">
-              <h3>Just a bath. Really.</h3>
-              <p>One visit is a perfectly good reason to call. Before a family event or a big appointment, or the week your usual helper is out of town.</p>
-            </div>
-            <div data-mode-copy="weeks">
-              <h3>Back on your feet.</h3>
-              <p>After a surgery, a fall or a hospital stay, showering alone can wait. We cover the weeks until it's safe again, then step back.</p>
-            </div>
-            <div data-mode-copy="ongoing">
-              <h3>A standing appointment.</h3>
-              <p>A steady routine on the days you choose, with a caregiver matched to you. One less thing for the family to juggle.</p>
-            </div>
-          </figcaption>
-        </figure>
-
-        <div class="pl-build">
-          <fieldset class="pl-field">
+      <div class="pl-board">
+        <div class="pl-steps">
+          <fieldset class="pl-field step">
             <legend>What should each visit include?</legend>
             <div class="svc-picks">
               <label class="svc"><input type="checkbox" value="Shower assistance" checked><span><svg class="ico"><use href="#i-shower"/></svg>Shower</span></label>
@@ -226,7 +221,7 @@
             </div>
           </fieldset>
 
-          <fieldset class="pl-field" data-show="weeks ongoing">
+          <fieldset class="pl-field step" data-show="weeks ongoing">
             <legend>Which days work best?</legend>
             <div class="days" id="days">
               <label><input type="checkbox" value="0"><span>Mon</span></label>
@@ -239,21 +234,27 @@
             </div>
           </fieldset>
 
-          <fieldset class="pl-field" data-show="weeks">
+          <fieldset class="pl-field step" data-show="weeks">
             <legend>For about how long?</legend>
             <div class="weeks-row">
               <input type="range" id="weeks" min="1" max="12" value="4" aria-describedby="weeks-out">
               <output id="weeks-out" for="weeks">4 weeks</output>
             </div>
           </fieldset>
+        </div>
 
+        <div class="pl-sheet">
+          <div class="sheet-rings" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+          <div class="sheet-head">
+            <p class="sheet-month" id="sheet-month"></p>
+            <p class="sheet-sub">Your plan, starting next Monday</p>
+          </div>
           <div class="pl-cal" aria-live="polite">
             <div class="cal-head"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div>
             <div class="cal-body" id="cal"></div>
             <p class="cal-more" id="cal-more"></p>
           </div>
-
-          <div class="pl-sum">
+          <div class="ticket">
             <p id="plan-sum"></p>
             <a class="btn btn-pink" href="#consult" id="plan-send">Send this plan with my consult request<svg class="ico"><use href="#i-arrow"/></svg></a>
           </div>
@@ -261,6 +262,7 @@
       </div>
     </div>
   </div>
+  <div class="edge edge-bottom" style="--edge:var(--blush-50)" aria-hidden="true"></div>
 </section>
 
 <!-- A VISIT -->
@@ -433,6 +435,7 @@
 
 <!-- CONSULT -->
 <section class="consult" id="consult">
+  <div class="edge edge-top" style="--edge:var(--ground)" aria-hidden="true"></div>
   <div class="wrap consult-grid">
     <div class="consult-copy">
       <p class="eyebrow eyebrow-light">Free in-home consult</p>
@@ -462,6 +465,7 @@
       <p class="f-status" id="f-status" role="status"></p>
     </form>
   </div>
+  <div class="edge edge-bottom" style="--edge:var(--ink)" aria-hidden="true"></div>
 </section>
 
 </main>
@@ -515,6 +519,6 @@
 </div>
 
 <script src="assets/reviews.js?v=3" defer></script>
-<script src="assets/app.js?v=7" defer></script>
+<script src="assets/app.js?v=9" defer></script>
 </body>
 </html>
