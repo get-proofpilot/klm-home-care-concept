@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,400..800,100;1,9..144,400..700,100&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script>document.documentElement.classList.add("js");try{if(/[?&]nointro/.test(location.search))sessionStorage.setItem("klm_intro","1");if(matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("intro-seen")}catch(e){}setTimeout(function(){document.documentElement.classList.add("hero-go")},5200)</script>
-<link rel="stylesheet" href="assets/site.css?v=14">
+<link rel="stylesheet" href="assets/site.css?v=19">
 </head>
 <body>
 
@@ -36,6 +36,7 @@
     <symbol id="i-home" viewBox="0 0 32 32"><g class="du" transform="translate(1.8 2)"><path d="M7.5 13v14h17V13L16 5.5z"/></g><path d="M4.5 15L16 5l11.5 10"/><path d="M7.5 13v14h17V13"/><path class="ac" d="M16 25.5s-4.5-2.7-4.5-6a2.4 2.4 0 0 1 4.5-1.2 2.4 2.4 0 0 1 4.5 1.2c0 3.3-4.5 6-4.5 6z"/></symbol>
     <symbol id="i-insta" viewBox="0 0 32 32"><rect x="5" y="5" width="22" height="22" rx="6"/><circle cx="16" cy="16" r="5"/><circle cx="22.3" cy="9.7" r=".8"/></symbol>
     <symbol id="i-fb" viewBox="0 0 32 32"><path d="M18 28V17h3.6l.6-4.3H18V10c0-1.2.4-2.1 2.1-2.1h2.2V4.1A29 29 0 0 0 19.1 4C16 4 13.8 5.9 13.8 9.4v3.3h-3.6V17h3.6v11"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 32 32"><g class="du" transform="translate(1.8 2)"><path d="M16 3.5l10 4v8c0 6.5-4.4 10.8-10 13-5.6-2.2-10-6.5-10-13v-8z"/></g><path d="M16 3.5l10 4v8c0 6.5-4.4 10.8-10 13-5.6-2.2-10-6.5-10-13v-8z"/><path class="ac" d="M11.5 16l3 3 6-6.5"/></symbol>
     <symbol id="i-arrow" viewBox="0 0 32 32"><path d="M6 16h19M18 9l7 7-7 7"/></symbol>
   </defs>
 </svg>
@@ -119,10 +120,10 @@
   </div>
 
   <dl class="wrap hero-facts">
-    <div><dt>Consult</dt><dd>Free, in your home</dd></div>
-    <div><dt>Billing</dt><dd>Weekly or monthly</dd></div>
-    <div><dt>Caregivers</dt><dd>Trained and tested</dd></div>
-    <div><dt>Serving</dt><dd>7 East Valley cities</dd></div>
+    <div class="fact" data-c="pink"><span class="fact-ico" aria-hidden="true"><svg class="ico"><use href="#i-home"/></svg></span><dt>Consult</dt><dd>Free, in your home</dd></div>
+    <div class="fact" data-c="plum"><span class="fact-ico" aria-hidden="true"><svg class="ico"><use href="#i-card"/></svg></span><dt>Billing</dt><dd>Weekly or monthly</dd></div>
+    <div class="fact" data-c="blush"><span class="fact-ico" aria-hidden="true"><svg class="ico"><use href="#i-badge"/></svg></span><dt>Caregivers</dt><dd>Trained and tested</dd></div>
+    <div class="fact" data-c="deep"><span class="fact-ico" aria-hidden="true"><svg class="ico"><use href="#i-pin"/></svg></span><dt>Serving</dt><dd>7 East Valley cities</dd></div>
   </dl>
 </section>
 
@@ -364,33 +365,75 @@
         <p class="eyebrow">Straight answers</p>
         <h2>The questions families ask us first.</h2>
       </div>
-      <p class="sec-sub">Still wondering about something? Call <a href="#" data-preview-off="1">602-369-2535</a> and ask. Talking it through is free.</p>
+      <p class="sec-sub">Tap a question. The short answer is right on the button; the full one opens in the chat.</p>
     </div>
-    <div class="qa">
-      <article>
-        <h3>Does insurance cover it?</h3>
-        <p>Usually not. Custodial care like bathing isn't covered by Medicare, Medicaid or most commercial plans. A private long-term care policy may reimburse or pay us directly, and if you already qualify for the VA's Aid &amp; Attendance benefit, we'll look at that with you.</p>
-      </article>
-      <article>
-        <h3>Can I book just one visit?</h3>
-        <p>Yes. "Just a bath" is a real request we hear all the time. One visit, a few weeks, or a standing schedule all start the same way: a free consult.</p>
-      </article>
-      <article>
-        <h3>Do you offer full-time caregiving?</h3>
-        <p>No, and that's by design. We focus on bathing and incontinence visits so we can do them exceptionally well, on the days you need them.</p>
-      </article>
-      <article>
-        <h3>What happens at the free consult?</h3>
-        <p>We talk through the care you need, the days and times that work, anything we should know, and how you'd like to pay. Then we build your care plan and match you with a caregiver.</p>
-      </article>
-      <article>
-        <h3>How do I pay?</h3>
-        <p>Weekly or monthly, whichever suits you. Pay by check, or by credit or debit card through our secure online invoicing.</p>
-      </article>
-      <article>
-        <h3>How are caregivers trained?</h3>
-        <p>Every KLM caregiver is certified through a training and testing process before they work with clients, and keeps learning through our annual caregiver support program.</p>
-      </article>
+    <div class="faq">
+      <div class="faq-qs" role="tablist" aria-label="Common questions">
+        <button class="fq" role="tab" id="fq-ins" aria-controls="fa-ins" aria-selected="true" tabindex="0">
+          <span class="fq-ico" aria-hidden="true"><svg class="ico"><use href="#i-shield"/></svg></span>
+          <span class="fq-text">Does insurance cover it?</span>
+          <span class="fq-short">Usually not</span>
+        </button>
+        <button class="fq" role="tab" id="fq-one" aria-controls="fa-one" aria-selected="false" tabindex="-1">
+          <span class="fq-ico" aria-hidden="true"><svg class="ico"><use href="#i-cal"/></svg></span>
+          <span class="fq-text">Can I book just one visit?</span>
+          <span class="fq-short">Yes</span>
+        </button>
+        <button class="fq" role="tab" id="fq-full" aria-controls="fa-full" aria-selected="false" tabindex="-1">
+          <span class="fq-ico" aria-hidden="true"><svg class="ico"><use href="#i-gem"/></svg></span>
+          <span class="fq-text">Do you offer full-time caregiving?</span>
+          <span class="fq-short">No, by design</span>
+        </button>
+        <button class="fq" role="tab" id="fq-consult" aria-controls="fa-consult" aria-selected="false" tabindex="-1">
+          <span class="fq-ico" aria-hidden="true"><svg class="ico"><use href="#i-home"/></svg></span>
+          <span class="fq-text">What happens at the free consult?</span>
+          <span class="fq-short">Free, at home</span>
+        </button>
+        <button class="fq" role="tab" id="fq-pay" aria-controls="fa-pay" aria-selected="false" tabindex="-1">
+          <span class="fq-ico" aria-hidden="true"><svg class="ico"><use href="#i-card"/></svg></span>
+          <span class="fq-text">How do I pay?</span>
+          <span class="fq-short">Weekly or monthly</span>
+        </button>
+        <button class="fq" role="tab" id="fq-train" aria-controls="fa-train" aria-selected="false" tabindex="-1">
+          <span class="fq-ico" aria-hidden="true"><svg class="ico"><use href="#i-badge"/></svg></span>
+          <span class="fq-text">How are caregivers trained?</span>
+          <span class="fq-short">Certified</span>
+        </button>
+      </div>
+      <div class="faq-chat">
+        <div class="chat-top">
+          <span class="chat-av" aria-hidden="true"><svg class="ico"><use href="#i-gem"/></svg></span>
+          <span class="chat-who"><b>KLM Home Care</b><small>Answers from our FAQ</small></span>
+        </div>
+        <div class="chat-body" aria-live="polite">
+          <div class="fa" role="tabpanel" id="fa-ins" aria-labelledby="fq-ins">
+            <p class="bubble bq">Does insurance cover it?</p>
+            <p class="bubble ba">Usually not. Custodial care like bathing isn't covered by Medicare, Medicaid or most commercial plans. A private long-term care policy may reimburse or pay us directly, and if you already qualify for the VA's Aid &amp; Attendance benefit, we'll look at that with you.</p>
+          </div>
+          <div class="fa" role="tabpanel" id="fa-one" aria-labelledby="fq-one">
+            <p class="bubble bq">Can I book just one visit?</p>
+            <p class="bubble ba">Yes. "Just a bath" is a real request we hear all the time. One visit, a few weeks, or a standing schedule all start the same way: a free consult.</p>
+          </div>
+          <div class="fa" role="tabpanel" id="fa-full" aria-labelledby="fq-full">
+            <p class="bubble bq">Do you offer full-time caregiving?</p>
+            <p class="bubble ba">No, and that's by design. We focus on bathing and incontinence visits so we can do them exceptionally well, on the days you need them.</p>
+          </div>
+          <div class="fa" role="tabpanel" id="fa-consult" aria-labelledby="fq-consult">
+            <p class="bubble bq">What happens at the free consult?</p>
+            <p class="bubble ba">We talk through the care you need, the days and times that work, anything we should know, and how you'd like to pay. Then we build your care plan and match you with a caregiver.</p>
+          </div>
+          <div class="fa" role="tabpanel" id="fa-pay" aria-labelledby="fq-pay">
+            <p class="bubble bq">How do I pay?</p>
+            <p class="bubble ba">Weekly or monthly, whichever suits you. Pay by check, or by credit or debit card through our secure online invoicing.</p>
+          </div>
+          <div class="fa" role="tabpanel" id="fa-train" aria-labelledby="fq-train">
+            <p class="bubble bq">How are caregivers trained?</p>
+            <p class="bubble ba">Every KLM caregiver is certified through a training and testing process before they work with clients, and keeps learning through our annual caregiver support program.</p>
+          </div>
+          <p class="typing" aria-hidden="true"><i></i><i></i><i></i></p>
+        </div>
+        <a class="chat-foot" href="#" data-preview-off="1"><svg class="ico"><use href="#i-phone"/></svg>Ask us anything else: <b>602-369-2535</b></a>
+      </div>
     </div>
   </div>
 </section>
@@ -402,13 +445,13 @@
       <p class="eyebrow">Where we go</p>
       <h2>Home base is San Tan Valley. Our caregivers cover seven cities.</h2>
       <ul class="city-list">
-        <li><a href="#" data-preview-off="1" data-city="stv">San Tan Valley</a></li>
-        <li><a href="#" data-preview-off="1" data-city="qc">Queen Creek</a></li>
-        <li><a href="#" data-preview-off="1" data-city="gil">Gilbert</a></li>
-        <li><a href="#" data-preview-off="1" data-city="cha">Chandler</a></li>
-        <li><a href="#" data-preview-off="1" data-city="mesa">Mesa</a></li>
-        <li><a href="#" data-preview-off="1" data-city="aj">Apache Junction</a></li>
-        <li><a href="#" data-preview-off="1" data-city="gc">Gold Canyon</a></li>
+        <li><a class="plaque home" href="#" data-preview-off="1" data-city="stv"><span class="pq-gem" aria-hidden="true"></span><b>San Tan Valley</b><small>Home base</small></a></li>
+        <li><a class="plaque" href="#" data-preview-off="1" data-city="qc"><span class="pq-gem" aria-hidden="true"></span><b>Queen Creek</b><small>7 mi</small></a></li>
+        <li><a class="plaque" href="#" data-preview-off="1" data-city="gc"><span class="pq-gem" aria-hidden="true"></span><b>Gold Canyon</b><small>14 mi</small></a></li>
+        <li><a class="plaque" href="#" data-preview-off="1" data-city="aj"><span class="pq-gem" aria-hidden="true"></span><b>Apache Junction</b><small>16 mi</small></a></li>
+        <li><a class="plaque" href="#" data-preview-off="1" data-city="gil"><span class="pq-gem" aria-hidden="true"></span><b>Gilbert</b><small>19 mi</small></a></li>
+        <li><a class="plaque" href="#" data-preview-off="1" data-city="cha"><span class="pq-gem" aria-hidden="true"></span><b>Chandler</b><small>20 mi</small></a></li>
+        <li><a class="plaque" href="#" data-preview-off="1" data-city="mesa"><span class="pq-gem" aria-hidden="true"></span><b>Mesa</b><small>23 mi</small></a></li>
       </ul>
       <p class="areas-note">Just outside these? Call and ask. We'll tell you straight.</p>
     </div>
@@ -420,13 +463,13 @@
         <g class="shields"><g class="sh sh-us" transform="translate(421.8 135.2)"><path d="M-13-11H13C13-2 12 6 0 12C-12 6-13-2-13-11Z"/><text y="4.5">60</text></g><g class="sh sh-loop" transform="translate(361.9 225.6)"><rect x="-15" y="-10" width="30" height="20" rx="10"/><text y="4.5">202</text></g><g class="sh sh-az" transform="translate(398.0 260.8)"><rect x="-11" y="-10" width="22" height="20" rx="4"/><text y="4.5">24</text></g></g>
         <g class="routes"><path class="rt" data-city="qc" d="M531.7 452.6Q476.5 380.0 387.7 359.3"/><path class="rt" data-city="gil" d="M531.7 452.6Q402.0 257.7 177.8 190.3"/><path class="rt" data-city="cha" d="M531.7 452.6Q352.9 282.8 106.8 265.9"/><path class="rt" data-city="mesa" d="M531.7 452.6Q391.3 196.7 120.1 89.0"/><path class="rt" data-city="aj" d="M531.7 452.6Q582.6 265.6 502.7 89.1"/><path class="rt" data-city="gc" d="M531.7 452.6Q646.3 328.4 655.5 159.6"/></g>
         <path class="rt-on" id="rt-on" d=""/>
-        <g class="cities"><g class="city" data-city="qc" data-mi="7" data-name="Queen Creek" transform="translate(387.7 359.3)" tabindex="-1"><circle class="hit" r="22"/><path class="gm" d="M-8.0 -3.0L-5.0 -7.0H5.0L8.0 -3.0L0 8.0Z"/><text x="-14" y="5" text-anchor="end">Queen Creek</text></g><g class="city" data-city="gil" data-mi="19" data-name="Gilbert" transform="translate(177.8 190.3)" tabindex="-1"><circle class="hit" r="22"/><path class="gm" d="M-8.0 -3.0L-5.0 -7.0H5.0L8.0 -3.0L0 8.0Z"/><text x="14" y="5" text-anchor="start">Gilbert</text></g><g class="city" data-city="cha" data-mi="20" data-name="Chandler" transform="translate(106.8 265.9)" tabindex="-1"><circle class="hit" r="22"/><path class="gm" d="M-8.0 -3.0L-5.0 -7.0H5.0L8.0 -3.0L0 8.0Z"/><text x="14" y="5" text-anchor="start">Chandler</text></g><g class="city" data-city="mesa" data-mi="23" data-name="Mesa" transform="translate(120.1 89.0)" tabindex="-1"><circle class="hit" r="22"/><path class="gm" d="M-8.0 -3.0L-5.0 -7.0H5.0L8.0 -3.0L0 8.0Z"/><text x="14" y="5" text-anchor="start">Mesa</text></g><g class="city" data-city="aj" data-mi="16" data-name="Apache Junction" transform="translate(502.7 89.1)" tabindex="-1"><circle class="hit" r="22"/><path class="gm" d="M-8.0 -3.0L-5.0 -7.0H5.0L8.0 -3.0L0 8.0Z"/><text x="-14" y="5" text-anchor="end">Apache Junction</text></g><g class="city" data-city="gc" data-mi="14" data-name="Gold Canyon" transform="translate(655.5 159.6)" tabindex="-1"><circle class="hit" r="22"/><path class="gm" d="M-8.0 -3.0L-5.0 -7.0H5.0L8.0 -3.0L0 8.0Z"/><text x="0" y="-16" text-anchor="middle">Gold Canyon</text></g><g class="city home" data-city="stv" data-mi="0" data-name="San Tan Valley" transform="translate(531.7 452.6)"><circle class="pulse" r="14"/><circle class="hit" r="24"/><path class="gm" d="M-13.6 -5.1L-8.5 -11.9H8.5L13.6 -5.1L0 13.6Z"/><text x="-22" y="-2" text-anchor="end">San Tan Valley</text><text class="sub" x="-22" y="15" text-anchor="end">Home base</text></g></g>
+        <g class="cities"><g class="city" data-city="qc" data-mi="7" data-name="Queen Creek" transform="translate(387.7 359.3)" tabindex="-1"><circle class="hit" r="22"/><path class="gm" d="M-8.0 -3.0L-5.0 -7.0H5.0L8.0 -3.0L0 8.0Z"/><text x="-20" y="5" text-anchor="end">Queen Creek</text></g><g class="city" data-city="gil" data-mi="19" data-name="Gilbert" transform="translate(177.8 190.3)" tabindex="-1"><circle class="hit" r="22"/><path class="gm" d="M-8.0 -3.0L-5.0 -7.0H5.0L8.0 -3.0L0 8.0Z"/><text x="20" y="5" text-anchor="start">Gilbert</text></g><g class="city" data-city="cha" data-mi="20" data-name="Chandler" transform="translate(106.8 265.9)" tabindex="-1"><circle class="hit" r="22"/><path class="gm" d="M-8.0 -3.0L-5.0 -7.0H5.0L8.0 -3.0L0 8.0Z"/><text x="20" y="5" text-anchor="start">Chandler</text></g><g class="city" data-city="mesa" data-mi="23" data-name="Mesa" transform="translate(120.1 89.0)" tabindex="-1"><circle class="hit" r="22"/><path class="gm" d="M-8.0 -3.0L-5.0 -7.0H5.0L8.0 -3.0L0 8.0Z"/><text x="20" y="5" text-anchor="start">Mesa</text></g><g class="city" data-city="aj" data-mi="16" data-name="Apache Junction" transform="translate(502.7 89.1)" tabindex="-1"><circle class="hit" r="22"/><path class="gm" d="M-8.0 -3.0L-5.0 -7.0H5.0L8.0 -3.0L0 8.0Z"/><text x="-20" y="5" text-anchor="end">Apache Junction</text></g><g class="city" data-city="gc" data-mi="14" data-name="Gold Canyon" transform="translate(655.5 159.6)" tabindex="-1"><circle class="hit" r="22"/><path class="gm" d="M-8.0 -3.0L-5.0 -7.0H5.0L8.0 -3.0L0 8.0Z"/><text x="0" y="-22" text-anchor="middle">Gold Canyon</text></g><g class="city home" data-city="stv" data-mi="0" data-name="San Tan Valley" transform="translate(531.7 452.6)"><circle class="pulse" r="14"/><circle class="hit" r="24"/><path class="gm" d="M-13.6 -5.1L-8.5 -11.9H8.5L13.6 -5.1L0 13.6Z"/><text x="-30" y="-4" text-anchor="end">San Tan Valley</text><text class="sub" x="-30" y="18" text-anchor="end">Home base</text></g></g>
         <g class="map-bf" id="map-bf" transform="translate(-60 -60)"><svg x="-20" y="-16" width="40" height="32" viewBox="0 0 40 32" overflow="visible" style="--a:#FD288D;--b:#FC73B1"><g class="bfly"><g class="wl"><path class="fw" d="M19.5 14C15 4 6.5-.8 2.6 3.3C-.6 6.9 2.6 13.6 8.8 15.4C12.9 16.5 17 16.1 19.5 15.5Z"/><path class="hw" d="M19.5 17C14 17 7.5 19.2 6.6 24C5.9 28.4 9.9 30.2 13 28.2C16.1 26.2 18.6 21.2 19.5 18Z"/><path class="vn" d="M18.6 15C14 11.4 9 7.6 4.6 5.4M18.6 17.6C15 19.4 11.2 22.4 9.4 26"/><circle class="sp" cx="5.6" cy="5.8" r="1.35"/><circle class="sp" cx="8.6" cy="4.2" r=".85"/></g><g class="wr"><g transform="matrix(-1 0 0 1 40 0)"><path class="fw" d="M19.5 14C15 4 6.5-.8 2.6 3.3C-.6 6.9 2.6 13.6 8.8 15.4C12.9 16.5 17 16.1 19.5 15.5Z"/><path class="hw" d="M19.5 17C14 17 7.5 19.2 6.6 24C5.9 28.4 9.9 30.2 13 28.2C16.1 26.2 18.6 21.2 19.5 18Z"/><path class="vn" d="M18.6 15C14 11.4 9 7.6 4.6 5.4M18.6 17.6C15 19.4 11.2 22.4 9.4 26"/><circle class="sp" cx="5.6" cy="5.8" r="1.35"/><circle class="sp" cx="8.6" cy="4.2" r=".85"/></g></g><ellipse class="bd" cx="20" cy="17" rx="1.3" ry="7"/><path class="an" d="M19.5 11C18 6 16.5 4 15 3M20.5 11C22 6 23.5 4 25 3"/></g></svg></g>
         <g class="scale" transform="translate(24 524)"><path d="M0 0H117.4M0-5V0M58.7-3V0M117.4-5V0"/><text x="125.4" y="4">5 mi</text></g><g class="north" transform="translate(36 34)"><path d="M0-14L6 6L0 2L-6 6Z"/><text y="22">N</text></g>
       </svg>
       <div class="map-card" id="map-card" aria-live="polite">
         <p class="mc-name" id="mc-name">San Tan Valley</p>
-        <p class="mc-mi" id="mc-mi">Home base. Every visit starts here.</p>
+        <p class="mc-mi" id="mc-mi">Home base. All seven cities sit within <b>23 miles</b>.</p>
       </div>
       <figcaption>Roads, canals and parks from OpenStreetMap. Distances are straight-line from San Tan Valley.</figcaption>
     </figure>
@@ -448,21 +491,29 @@
       </ul>
     </div>
     <form class="consult-form" id="consult-form" novalidate>
-      <div class="f-row">
-        <label class="f"><span>Your name</span><input name="name" autocomplete="name" required></label>
-        <label class="f"><span>Phone</span><input name="phone" type="tel" autocomplete="tel" required></label>
+      <div class="form-hello">
+        <span class="avs"><img src="assets/img/face-amber.webp" width="160" height="160" alt="Amber Arrington" loading="lazy"><img src="assets/img/face-john.webp" width="160" height="160" alt="John Arrington" loading="lazy"></span>
+        <p><b>Hi, we're Amber and John.</b> Tell us a little about what's going on, and we'll call you to set up your free visit.</p>
       </div>
-      <label class="f"><span>Email</span><input name="email" type="email" autocomplete="email"></label>
+      <div class="f-row">
+        <label class="f"><span>What should we call you?</span><input name="name" autocomplete="name" required placeholder="Your name"></label>
+        <label class="f"><span>Best number to reach you</span><input name="phone" type="tel" autocomplete="tel" required placeholder="(480) 555-0123"></label>
+      </div>
+      <label class="f"><span>Email <em>(optional)</em></span><input name="email" type="email" autocomplete="email" placeholder="you@example.com"></label>
       <fieldset class="f who">
-        <legend>Who is the care for?</legend>
+        <legend>Who's the care for?</legend>
         <label><input type="radio" name="who" value="Me" checked><span>Me</span></label>
         <label><input type="radio" name="who" value="A parent"><span>A parent</span></label>
         <label><input type="radio" name="who" value="My spouse or partner"><span>Spouse or partner</span></label>
         <label><input type="radio" name="who" value="Someone else"><span>Someone else</span></label>
       </fieldset>
-      <label class="f"><span>What would help most?</span><textarea name="msg" id="msg" rows="4" placeholder="For example: showers twice a week while I recover from knee surgery."></textarea></label>
-      <button class="btn btn-pink" type="submit">Request my free consult<svg class="ico"><use href="#i-arrow"/></svg></button>
+      <label class="f"><span>What would help most right now?</span><textarea name="msg" id="msg" rows="4" placeholder="For example: showers twice a week while I recover from knee surgery."></textarea></label>
+      <div class="form-send">
+        <button class="btn btn-pink" type="submit">Request my free consult<svg class="ico"><use href="#i-arrow"/></svg></button>
+        <p class="form-alt">Prefer to talk? <a href="#" data-preview-off="1">Call 602-369-2535</a></p>
+      </div>
       <p class="f-status" id="f-status" role="status"></p>
+      <p class="form-sign">with love, <span>KLM Home Care</span></p>
     </form>
   </div>
   <div class="edge edge-bottom" style="--edge:var(--ink)" aria-hidden="true"></div>
@@ -519,6 +570,6 @@
 </div>
 
 <script src="assets/reviews.js?v=3" defer></script>
-<script src="assets/app.js?v=9" defer></script>
+<script src="assets/app.js?v=11" defer></script>
 </body>
 </html>

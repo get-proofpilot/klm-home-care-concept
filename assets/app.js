@@ -353,6 +353,35 @@
     location.href = "mailto:klmhomecareservices@gmail.com?subject=" + encodeURIComponent("Free consult request") + "&body=" + encodeURIComponent(body);
   });
 
+  /* ---------- questions: tap one, it drops into the chat and KLM "types" the answer ---------- */
+  var fqs = $$(".fq"), fas = $$(".fa"), typing = $(".typing");
+  if (fqs.length) {
+    var showQ = function (btn, animate) {
+      fqs.forEach(function (b) { var on = b === btn; b.setAttribute("aria-selected", String(on)); b.tabIndex = on ? 0 : -1; });
+      var panel = document.getElementById(btn.getAttribute("aria-controls"));
+      fas.forEach(function (f) { f.hidden = f !== panel; f.classList.remove("in"); });
+      if (!animate) return;
+      var ba = $(".ba", panel);
+      ba.style.visibility = "hidden";
+      panel.classList.add("in");
+      typing.classList.add("on");
+      clearTimeout(showQ.t);
+      showQ.t = setTimeout(function () { typing.classList.remove("on"); ba.style.visibility = ""; }, 650);
+      if (innerWidth < 900) {
+        var chat = $(".faq-chat"), r = chat.getBoundingClientRect();
+        if (r.top > innerHeight - 120 || r.bottom < 0) chat.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    };
+    fqs.forEach(function (b, i) {
+      b.addEventListener("click", function () { showQ(b, true); });
+      b.addEventListener("keydown", function (e) {
+        var n = e.key === "ArrowDown" || e.key === "ArrowRight" ? fqs[(i + 1) % fqs.length] : e.key === "ArrowUp" || e.key === "ArrowLeft" ? fqs[(i - 1 + fqs.length) % fqs.length] : null;
+        if (n) { e.preventDefault(); n.focus(); showQ(n, true); }
+      });
+    });
+    showQ(fqs[0], false);
+  }
+
   /* ---------- reviews: real ones from reviews.js, invite when empty ---------- */
   var reviews = (window.KLM_REVIEWS || []).filter(function (r) { return r && r.text; });
   if (reviews.length) {
@@ -385,7 +414,7 @@
       if (!g) return;
       card.n.textContent = g.dataset.name;
       if (key === "stv") {
-        card.m.textContent = "Home base. Every visit starts here.";
+        card.m.innerHTML = "Home base. All seven cities sit within <b>23 miles</b>.";
         on.setAttribute("d", "");
         bf.classList.remove("on");
         return;
@@ -422,10 +451,47 @@
       a.addEventListener("mouseenter", function () { pick(a.dataset.city); });
       a.addEventListener("focus", function () { pick(a.dataset.city); });
     });
-    // first time the map scrolls into view, fly to Mesa so people see what it does
-    if ("IntersectionObserver" in window) {
+    // name plaques: a pill sized to each label, drawn behind it
+    var plaques = function () {
+      $$(".map .city").forEach(function (g) {
+        $$("rect.pq", g).forEach(function (r) { r.remove(); });
+        $$("text", g).forEach(function (t) {
+          var b = t.getBBox(), padX = 9, padY = 5;
+          var r = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+          r.setAttribute("class", "pq" + (t.classList.contains("sub") ? " pq-sub" : ""));
+          r.setAttribute("x", (b.x - padX).toFixed(1));
+          r.setAttribute("y", (b.y - padY).toFixed(1));
+          r.setAttribute("width", (b.width + padX * 2).toFixed(1));
+          r.setAttribute("height", (b.height + padY * 2).toFixed(1));
+          r.setAttribute("rx", ((b.height + padY * 2) / 2).toFixed(1));
+          g.insertBefore(r, t);
+        });
+      });
+    };
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(plaques); else plaques();
+    addEventListener("resize", function () { clearTimeout(plaques.t); plaques.t = setTimeout(plaques, 200); });
+
+    // on first view, every route draws out from home base and each city's plaque pops in as its route arrives
+    var order = ["qc", "gc", "aj", "gil", "cha", "mesa"];
+    var tour = function () {
+      mapEl.classList.remove("pre");
+      order.forEach(function (k, i) {
+        var rt = $('.map .rt[data-city="' + k + '"]'), g = $('.map .city[data-city="' + k + '"]');
+        var len = rt.getTotalLength(), delay = 120 + i * 140;
+        rt.animate([{ strokeDashoffset: len }, { strokeDashoffset: 0 }], { duration: 520, delay: delay, easing: "cubic-bezier(.5,0,.2,1)", fill: "backwards" });
+        rt.style.strokeDasharray = len;
+        var m = (g.getAttribute("transform") || "").match(/translate\(([-\d.]+)[ ,]+([-\d.]+)\)/);
+        var tx = m ? +m[1] : 0, ty = m ? +m[2] : 0;
+        g.animate([
+          { opacity: 0, transform: "translate(" + tx + "px," + (ty + 10) + "px)" },
+          { opacity: 1, transform: "translate(" + tx + "px," + ty + "px)" }
+        ], { duration: 420, delay: delay + 420, easing: "cubic-bezier(.3,1.4,.5,1)", fill: "backwards" });
+      });
+    };
+    if ("IntersectionObserver" in window && mapEl.animate) {
+      mapEl.classList.add("pre");
       var mio = new IntersectionObserver(function (es) {
-        if (es[0].isIntersecting) { mio.disconnect(); pick("mesa"); }
+        if (es[0].isIntersecting) { mio.disconnect(); tour(); }
       }, { threshold: .25 });
       mio.observe(mapEl);
     }
