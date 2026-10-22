@@ -18,6 +18,96 @@
     toast.t = setTimeout(function () { toastEl.classList.remove("show"); }, 2800);
   }
 
+  /* ---------- intro: butterflies part, the logo opens up, then glides into the header ---------- */
+  var root = document.documentElement;
+  var intro = $("#intro");
+  function heroGo() { root.classList.add("hero-go"); }
+  if (!intro || root.classList.contains("intro-seen") || !intro.animate) {
+    if (intro) intro.remove();
+    heroGo();
+  } else {
+    runIntro();
+  }
+
+  function runIntro() {
+    var stage = $("#intro-stage"), logo = $("#intro-logo"), tpl = $("#bfly-tpl");
+    var W = innerWidth, H = innerHeight, small = W < 700;
+    var cx = W / 2, cy = H / 2;
+    var lw = Math.min(W * 0.8, 560), lh = lw / 2;
+    var R = Math.hypot(W, H) * 0.62;
+    var colors = [["#FD288D", "#FC73B1"], ["#D4096E", "#FD288D"], ["#FC73B1", "#FFD3E6"], ["#B48CF0", "#D6BCFA"], ["#FD288D", "#D6BCFA"], ["#E85AA0", "#FFC2DD"]];
+    var n = small ? 16 : 26;
+    var rnd = function (a, b) { return a + Math.random() * (b - a); };
+    var head = function (dx, dy) { return Math.atan2(dy, dx) * 180 / Math.PI + 90; };
+    var tf = function (x, y, r) { return "translate(" + x.toFixed(1) + "px," + y.toFixed(1) + "px) rotate(" + r.toFixed(1) + "deg)"; };
+
+    for (var i = 0; i < n; i++) {
+      var el = document.createElement("div");
+      el.className = "bf";
+      el.appendChild(tpl.content.firstElementChild.cloneNode(true));
+      var c = colors[i % colors.length];
+      el.style.setProperty("--a", c[0]);
+      el.style.setProperty("--b", c[1]);
+      el.style.setProperty("--s", (small ? rnd(40, 70) : rnd(62, 118)) + "px");
+      el.style.setProperty("--fd", rnd(0.13, 0.22) + "s");
+      stage.appendChild(el);
+
+      var a0 = (i / n) * Math.PI * 2 + rnd(-0.25, 0.25);
+      var sx = cx + Math.cos(a0) * R, sy = cy + Math.sin(a0) * R;
+      var hx = cx + rnd(-0.5, 0.5) * lw, hy = cy + rnd(-0.38, 0.5) * lh;
+      // the midpoint swings off the straight line, so nobody flies like a dart
+      var mx = (sx + hx) / 2 + rnd(-90, 90), my = (sy + hy) / 2 + rnd(-90, 90);
+      var h2x = hx + rnd(-14, 14), h2y = hy + rnd(-10, 6);
+      var oa = Math.atan2(hy - cy, hx - cx) + rnd(-0.5, 0.5) - 0.35;
+      var ex = cx + Math.cos(oa) * R * 1.05, ey = cy + Math.sin(oa) * R * 1.05;
+      var qx = (h2x + ex) / 2 + rnd(-70, 70), qy = (h2y + ey) / 2 + rnd(-70, 70);
+
+      el.animate([
+        { offset: 0, transform: tf(sx, sy, head(mx - sx, my - sy)) },
+        { offset: 0.2, transform: tf(mx, my, head(hx - mx, hy - my)), easing: "cubic-bezier(.3,.7,.4,1)" },
+        { offset: 0.4, transform: tf(hx, hy, rnd(-20, 20)) },
+        { offset: 0.5, transform: tf(h2x, h2y, rnd(-20, 20)), easing: "cubic-bezier(.5,0,.8,.6)" },
+        { offset: 0.74, transform: tf(qx, qy, head(qx - h2x, qy - h2y)) },
+        { offset: 1, transform: tf(ex, ey, head(ex - qx, ey - qy)) }
+      ], { duration: 2400, delay: rnd(0, 140), fill: "both" });
+    }
+
+    var done = false;
+    function end(fast) {
+      if (done) return;
+      done = true;
+      try { sessionStorage.setItem("klm_intro", "1"); } catch (e) {}
+      var target = $(".site-head .brand img");
+      intro.classList.add("out");
+      if (target && !fast) {
+        // hand the logo to the header: animate from where it sits to the header's logo box
+        var from = logo.getBoundingClientRect(), to = target.getBoundingClientRect();
+        target.style.visibility = "hidden";
+        logo.style.animation = "none";
+        logo.style.opacity = "1";
+        logo.style.clipPath = "none";
+        logo.style.left = from.left + "px";
+        logo.style.top = from.top + "px";
+        logo.style.width = from.width + "px";
+        logo.style.transform = "none";
+        logo.animate([
+          { transform: "translate(0,0) scale(1)" },
+          { transform: "translate(" + (to.left - from.left) + "px," + (to.top - from.top) + "px) scale(" + (to.width / from.width) + ")" }
+        ], { duration: 780, easing: "cubic-bezier(.65,0,.25,1)", fill: "forwards" });
+        setTimeout(heroGo, 320);
+        setTimeout(function () { target.style.visibility = ""; intro.remove(); }, 820);
+      } else {
+        heroGo();
+        intro.style.transition = "opacity .35s";
+        intro.style.opacity = "0";
+        setTimeout(function () { intro.remove(); }, 380);
+      }
+    }
+    setTimeout(function () { end(false); }, 2500);
+    $(".intro-skip", intro).addEventListener("click", function () { end(true); });
+    addEventListener("keydown", function () { end(true); }, { once: true });
+  }
+
   /* ---------- header ---------- */
   var head = $(".site-head");
   var mbar = $(".mbar");
@@ -256,15 +346,63 @@
     $("#rv-invite").classList.add("rv-invite-compact");
   }
 
-  /* ---------- map: city list <-> dots ---------- */
-  $$(".city-list a").forEach(function (a) {
-    var g = $('.cities g[data-city="' + a.dataset.city + '"]');
-    if (!g) return;
-    function on() { g.classList.add("hot"); a.classList.add("hot"); }
-    function off() { g.classList.remove("hot"); a.classList.remove("hot"); }
-    a.addEventListener("mouseenter", on); a.addEventListener("mouseleave", off);
-    a.addEventListener("focus", on); a.addEventListener("blur", off);
-  });
+  /* ---------- map: pick a city, the butterfly flies the route from home base ---------- */
+  var mapEl = $("#map");
+  if (mapEl) {
+    var on = $("#rt-on"), bf = $("#map-bf"), card = { n: $("#mc-name"), m: $("#mc-mi") };
+    var flight;
+    var pick = function (key) {
+      $$(".map .city").forEach(function (g) { g.classList.toggle("on", g.dataset.city === key); });
+      $$(".city-list a").forEach(function (a) { a.classList.toggle("hot", a.dataset.city === key); });
+      var g = $('.map .city[data-city="' + key + '"]');
+      if (!g) return;
+      card.n.textContent = g.dataset.name;
+      if (key === "stv") {
+        card.m.textContent = "Home base. Every visit starts here.";
+        on.setAttribute("d", "");
+        bf.classList.remove("on");
+        return;
+      }
+      card.m.innerHTML = "About <b>" + g.dataset.mi + " miles</b> from our San Tan Valley home base.";
+      var rt = $('.map .rt[data-city="' + key + '"]');
+      on.setAttribute("d", rt.getAttribute("d"));
+      var len = on.getTotalLength();
+      on.style.strokeDasharray = len;
+      on.style.strokeDashoffset = len;
+      on.getBoundingClientRect();
+      on.style.transition = "stroke-dashoffset .9s cubic-bezier(.5,0,.2,1)";
+      on.style.strokeDashoffset = 0;
+      // the butterfly follows the same curve, turned to face where it is going
+      if (flight) cancelAnimationFrame(flight);
+      bf.classList.add("on");
+      bf.classList.remove("rest");
+      var t0 = performance.now(), dur = 900;
+      var step = function (now) {
+        var t = Math.min(1, (now - t0) / dur), e = t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+        var p = on.getPointAtLength(e * len), q = on.getPointAtLength(Math.min(len, e * len + 2));
+        var ang = Math.atan2(q.y - p.y, q.x - p.x) * 180 / Math.PI + 90;
+        bf.setAttribute("transform", "translate(" + p.x.toFixed(1) + " " + (p.y - 16).toFixed(1) + ") rotate(" + (t < 1 ? ang : 12).toFixed(1) + ")");
+        if (t < 1) flight = requestAnimationFrame(step);
+        else bf.classList.add("rest");
+      };
+      flight = requestAnimationFrame(step);
+    };
+    $$(".map .city").forEach(function (g) {
+      g.addEventListener("mouseenter", function () { pick(g.dataset.city); });
+      g.addEventListener("click", function () { pick(g.dataset.city); });
+    });
+    $$(".city-list a").forEach(function (a) {
+      a.addEventListener("mouseenter", function () { pick(a.dataset.city); });
+      a.addEventListener("focus", function () { pick(a.dataset.city); });
+    });
+    // first time the map scrolls into view, fly to Mesa so people see what it does
+    if ("IntersectionObserver" in window) {
+      var mio = new IntersectionObserver(function (es) {
+        if (es[0].isIntersecting) { mio.disconnect(); setTimeout(function () { pick("mesa"); }, 400); }
+      }, { threshold: .5 });
+      mio.observe(mapEl);
+    }
+  }
 
   /* ---------- reveal ---------- */
   if ("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {

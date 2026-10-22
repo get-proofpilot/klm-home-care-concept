@@ -12,7 +12,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,400..800,100;1,9..144,400..700,100&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=6">
+<script>document.documentElement.classList.add("js");try{if(/[?&]nointro/.test(location.search))sessionStorage.setItem("klm_intro","1");if(matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("intro-seen")}catch(e){}setTimeout(function(){document.documentElement.classList.add("hero-go")},5200)</script>
+<link rel="stylesheet" href="assets/site.css?v=9">
 </head>
 <body>
 
@@ -38,6 +39,15 @@
     <symbol id="i-arrow" viewBox="0 0 32 32"><path d="M6 16h19M18 9l7 7-7 7"/></symbol>
   </defs>
 </svg>
+
+<div class="intro" id="intro" aria-hidden="true">
+  <div class="intro-bg"></div>
+  <div class="intro-stage" id="intro-stage">
+    <img class="intro-logo" id="intro-logo" src="assets/img/klm-logo-640.webp" width="640" height="320" alt="">
+  </div>
+  <template id="bfly-tpl"><svg class="bfly" viewBox="0 0 40 32"><g class="wl"><path class="fw" d="M19.5 14C15 4 6.5-.8 2.6 3.3C-.6 6.9 2.6 13.6 8.8 15.4C12.9 16.5 17 16.1 19.5 15.5Z"/><path class="hw" d="M19.5 17C14 17 7.5 19.2 6.6 24C5.9 28.4 9.9 30.2 13 28.2C16.1 26.2 18.6 21.2 19.5 18Z"/><path class="vn" d="M18.6 15C14 11.4 9 7.6 4.6 5.4M18.6 17.6C15 19.4 11.2 22.4 9.4 26"/><circle class="sp" cx="5.6" cy="5.8" r="1.35"/><circle class="sp" cx="8.6" cy="4.2" r=".85"/></g><g class="wr"><g transform="matrix(-1 0 0 1 40 0)"><path class="fw" d="M19.5 14C15 4 6.5-.8 2.6 3.3C-.6 6.9 2.6 13.6 8.8 15.4C12.9 16.5 17 16.1 19.5 15.5Z"/><path class="hw" d="M19.5 17C14 17 7.5 19.2 6.6 24C5.9 28.4 9.9 30.2 13 28.2C16.1 26.2 18.6 21.2 19.5 18Z"/><path class="vn" d="M18.6 15C14 11.4 9 7.6 4.6 5.4M18.6 17.6C15 19.4 11.2 22.4 9.4 26"/><circle class="sp" cx="5.6" cy="5.8" r="1.35"/><circle class="sp" cx="8.6" cy="4.2" r=".85"/></g></g><ellipse class="bd" cx="20" cy="17" rx="1.3" ry="7"/><path class="an" d="M19.5 11C18 6 16.5 4 15 3M20.5 11C22 6 23.5 4 25 3"/></svg></template>
+  <button class="intro-skip" type="button">Skip</button>
+</div>
 
 <a class="skip" href="#main">Skip to content</a>
 
@@ -77,9 +87,9 @@
       <div class="howlong" role="group" aria-labelledby="howlong-l">
         <p id="howlong-l" class="howlong-l">How long do you need help?</p>
         <div class="howlong-row">
-          <a class="hl-chip" href="#plan" data-mode="once"><b>Just once</b><small>One visit</small></a>
-          <a class="hl-chip" href="#plan" data-mode="weeks"><b>A few weeks</b><small>Recovery help</small></a>
-          <a class="hl-chip" href="#plan" data-mode="ongoing"><b>For the long run</b><small>Standing visits</small></a>
+          <a class="hl-chip" href="#plan" data-mode="once"><span class="hl-viz" aria-hidden="true"><i></i><i></i><i class="o"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b>Just once</b><small>One visit</small></a>
+          <a class="hl-chip" href="#plan" data-mode="weeks"><span class="hl-viz" aria-hidden="true"><i class="o"></i><i></i><i></i><i class="o"></i><i></i><i></i><i></i><i class="o"></i><i></i><i></i><i class="o"></i><i></i><i></i><i></i><i class="x"></i><i></i><i></i><i class="x"></i><i></i><i></i><i></i></span><b>A few weeks</b><small>Recovery help</small></a>
+          <a class="hl-chip" href="#plan" data-mode="ongoing"><span class="hl-viz" aria-hidden="true"><i class="o"></i><i></i><i></i><i class="o"></i><i></i><i></i><i></i><i class="o"></i><i></i><i></i><i class="o"></i><i></i><i></i><i></i><i class="o f"></i><i></i><i></i><i class="o f"></i><i></i><i></i><i></i></span><b>For the long run</b><small>Standing visits</small></a>
         </div>
       </div>
 
@@ -95,11 +105,9 @@
         <div class="gem-photo">
           <img src="assets/img/visit-towel.webp" srcset="assets/img/visit-towel-900.webp 900w, assets/img/visit-towel.webp 1800w" sizes="(max-width: 900px) 90vw, 46vw" width="1800" height="1013" alt="A caregiver gently towel-drying a woman's hair after a shower" fetchpriority="high">
         </div>
+        <span class="perch" aria-hidden="true"><svg class="bfly" viewBox="0 0 40 32" style="--a:#FD288D;--b:#FC73B1"><g class="wl"><path class="fw" d="M19.5 14C15 4 6.5-.8 2.6 3.3C-.6 6.9 2.6 13.6 8.8 15.4C12.9 16.5 17 16.1 19.5 15.5Z"/><path class="hw" d="M19.5 17C14 17 7.5 19.2 6.6 24C5.9 28.4 9.9 30.2 13 28.2C16.1 26.2 18.6 21.2 19.5 18Z"/><path class="vn" d="M18.6 15C14 11.4 9 7.6 4.6 5.4M18.6 17.6C15 19.4 11.2 22.4 9.4 26"/><circle class="sp" cx="5.6" cy="5.8" r="1.35"/><circle class="sp" cx="8.6" cy="4.2" r=".85"/></g><g class="wr"><g transform="matrix(-1 0 0 1 40 0)"><path class="fw" d="M19.5 14C15 4 6.5-.8 2.6 3.3C-.6 6.9 2.6 13.6 8.8 15.4C12.9 16.5 17 16.1 19.5 15.5Z"/><path class="hw" d="M19.5 17C14 17 7.5 19.2 6.6 24C5.9 28.4 9.9 30.2 13 28.2C16.1 26.2 18.6 21.2 19.5 18Z"/><path class="vn" d="M18.6 15C14 11.4 9 7.6 4.6 5.4M18.6 17.6C15 19.4 11.2 22.4 9.4 26"/><circle class="sp" cx="5.6" cy="5.8" r="1.35"/><circle class="sp" cx="8.6" cy="4.2" r=".85"/></g></g><ellipse class="bd" cx="20" cy="17" rx="1.3" ry="7"/><path class="an" d="M19.5 11C18 6 16.5 4 15 3M20.5 11C22 6 23.5 4 25 3"/></svg></span>
       </div>
-      <div class="note-card">
-        <svg class="ico"><use href="#i-home"/></svg>
-        <p><b>Your bathroom. Your products. Your routine.</b> We bring the help, not a new way of doing things.</p>
-      </div>
+      <p class="note-chip"><svg class="ico"><use href="#i-home"/></svg>Your bathroom, your products, your routine.</p>
     </div>
   </div>
 
@@ -402,32 +410,23 @@
       </ul>
       <p class="areas-note">Just outside these? Call and ask. We'll tell you straight.</p>
     </div>
-    <figure class="map">
-      <svg viewBox="0 0 600 400" role="img" aria-labelledby="map-t">
-        <title id="map-t">Map of the seven East Valley cities KLM serves, placed by real location, with San Tan Valley as home base</title>
-        <defs>
-          <pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.2"/></pattern>
-        </defs>
-        <rect class="map-dots" width="600" height="400" fill="url(#dots)"/>
-        <g class="routes">
-          <path d="M427 340Q340 330 301 266"/>
-          <path d="M427 340Q250 260 116 132"/>
-          <path d="M427 340Q220 300 55 192"/>
-          <path d="M427 340Q200 180 66 52"/>
-          <path d="M427 340Q440 180 402 52"/>
-          <path d="M427 340Q520 220 536 109"/>
-        </g>
-        <g class="cities">
-          <g data-city="mesa" transform="translate(66 52)"><circle r="7"/><text x="14" y="5">Mesa</text></g>
-          <g data-city="cha" transform="translate(55 192)"><circle r="7"/><text x="14" y="5">Chandler</text></g>
-          <g data-city="gil" transform="translate(116 132)"><circle r="7"/><text x="14" y="5">Gilbert</text></g>
-          <g data-city="qc" transform="translate(301 266)"><circle r="7"/><text x="-14" y="5" text-anchor="end">Queen Creek</text></g>
-          <g data-city="aj" transform="translate(402 52)"><circle r="7"/><text x="-14" y="5" text-anchor="end">Apache Junction</text></g>
-          <g data-city="gc" transform="translate(536 109)"><circle r="7"/><text x="-4" y="-16" text-anchor="end">Gold Canyon</text></g>
-          <g data-city="stv" class="home" transform="translate(427 340)"><circle class="pulse" r="12"/><circle r="10"/><text x="-18" y="6" text-anchor="end">San Tan Valley</text></g>
-        </g>
+    <figure class="map" id="map">
+      <svg viewBox="0 0 760 552" role="img" aria-labelledby="map-t">
+        <title id="map-t">Map of the East Valley showing the seven cities KLM serves, drawn from real road data, with San Tan Valley as home base</title>
+        <image href="assets/img/ev-roads.svg" width="760" height="552"/>
+        <g class="peaks"><path class="pk" d="M699.8 99.8L704.8 90.8L709.8 99.8Z"/><path class="pk" d="M626.9 56.5L631.9 47.5L636.9 56.5Z"/><path class="pk" d="M740.3 63.8L745.3 54.8L750.3 63.8Z"/><path class="pk" d="M281.1 485.1L286.1 476.1L291.1 485.1Z"/><path class="pk" d="M389.9 465.7L394.9 456.7L399.9 465.7Z"/><text class="mt" x="675.0" y="97.1" text-anchor="end">Superstition Mountains</text><text class="mt" x="276.1" y="485.1" text-anchor="end">San Tan Mountains</text></g>
+        <g class="shields"><g class="sh sh-us" transform="translate(421.8 135.2)"><path d="M-13-11H13C13-2 12 6 0 12C-12 6-13-2-13-11Z"/><text y="4.5">60</text></g><g class="sh sh-loop" transform="translate(361.9 225.6)"><rect x="-15" y="-10" width="30" height="20" rx="10"/><text y="4.5">202</text></g><g class="sh sh-az" transform="translate(398.0 260.8)"><rect x="-11" y="-10" width="22" height="20" rx="4"/><text y="4.5">24</text></g></g>
+        <g class="routes"><path class="rt" data-city="qc" d="M531.7 452.6Q476.5 380.0 387.7 359.3"/><path class="rt" data-city="gil" d="M531.7 452.6Q402.0 257.7 177.8 190.3"/><path class="rt" data-city="cha" d="M531.7 452.6Q352.9 282.8 106.8 265.9"/><path class="rt" data-city="mesa" d="M531.7 452.6Q391.3 196.7 120.1 89.0"/><path class="rt" data-city="aj" d="M531.7 452.6Q582.6 265.6 502.7 89.1"/><path class="rt" data-city="gc" d="M531.7 452.6Q646.3 328.4 655.5 159.6"/></g>
+        <path class="rt-on" id="rt-on" d=""/>
+        <g class="cities"><g class="city" data-city="qc" data-mi="7" data-name="Queen Creek" transform="translate(387.7 359.3)" tabindex="-1"><circle class="hit" r="22"/><path class="gm" d="M-8.0 -3.0L-5.0 -7.0H5.0L8.0 -3.0L0 8.0Z"/><text x="-14" y="5" text-anchor="end">Queen Creek</text></g><g class="city" data-city="gil" data-mi="19" data-name="Gilbert" transform="translate(177.8 190.3)" tabindex="-1"><circle class="hit" r="22"/><path class="gm" d="M-8.0 -3.0L-5.0 -7.0H5.0L8.0 -3.0L0 8.0Z"/><text x="14" y="5" text-anchor="start">Gilbert</text></g><g class="city" data-city="cha" data-mi="20" data-name="Chandler" transform="translate(106.8 265.9)" tabindex="-1"><circle class="hit" r="22"/><path class="gm" d="M-8.0 -3.0L-5.0 -7.0H5.0L8.0 -3.0L0 8.0Z"/><text x="14" y="5" text-anchor="start">Chandler</text></g><g class="city" data-city="mesa" data-mi="23" data-name="Mesa" transform="translate(120.1 89.0)" tabindex="-1"><circle class="hit" r="22"/><path class="gm" d="M-8.0 -3.0L-5.0 -7.0H5.0L8.0 -3.0L0 8.0Z"/><text x="14" y="5" text-anchor="start">Mesa</text></g><g class="city" data-city="aj" data-mi="16" data-name="Apache Junction" transform="translate(502.7 89.1)" tabindex="-1"><circle class="hit" r="22"/><path class="gm" d="M-8.0 -3.0L-5.0 -7.0H5.0L8.0 -3.0L0 8.0Z"/><text x="-14" y="5" text-anchor="end">Apache Junction</text></g><g class="city" data-city="gc" data-mi="14" data-name="Gold Canyon" transform="translate(655.5 159.6)" tabindex="-1"><circle class="hit" r="22"/><path class="gm" d="M-8.0 -3.0L-5.0 -7.0H5.0L8.0 -3.0L0 8.0Z"/><text x="0" y="-16" text-anchor="middle">Gold Canyon</text></g><g class="city home" data-city="stv" data-mi="0" data-name="San Tan Valley" transform="translate(531.7 452.6)"><circle class="pulse" r="14"/><circle class="hit" r="24"/><path class="gm" d="M-13.6 -5.1L-8.5 -11.9H8.5L13.6 -5.1L0 13.6Z"/><text x="-22" y="-2" text-anchor="end">San Tan Valley</text><text class="sub" x="-22" y="15" text-anchor="end">Home base</text></g></g>
+        <g class="map-bf" id="map-bf" transform="translate(-60 -60)"><svg x="-20" y="-16" width="40" height="32" viewBox="0 0 40 32" overflow="visible" style="--a:#FD288D;--b:#FC73B1"><g class="bfly"><g class="wl"><path class="fw" d="M19.5 14C15 4 6.5-.8 2.6 3.3C-.6 6.9 2.6 13.6 8.8 15.4C12.9 16.5 17 16.1 19.5 15.5Z"/><path class="hw" d="M19.5 17C14 17 7.5 19.2 6.6 24C5.9 28.4 9.9 30.2 13 28.2C16.1 26.2 18.6 21.2 19.5 18Z"/><path class="vn" d="M18.6 15C14 11.4 9 7.6 4.6 5.4M18.6 17.6C15 19.4 11.2 22.4 9.4 26"/><circle class="sp" cx="5.6" cy="5.8" r="1.35"/><circle class="sp" cx="8.6" cy="4.2" r=".85"/></g><g class="wr"><g transform="matrix(-1 0 0 1 40 0)"><path class="fw" d="M19.5 14C15 4 6.5-.8 2.6 3.3C-.6 6.9 2.6 13.6 8.8 15.4C12.9 16.5 17 16.1 19.5 15.5Z"/><path class="hw" d="M19.5 17C14 17 7.5 19.2 6.6 24C5.9 28.4 9.9 30.2 13 28.2C16.1 26.2 18.6 21.2 19.5 18Z"/><path class="vn" d="M18.6 15C14 11.4 9 7.6 4.6 5.4M18.6 17.6C15 19.4 11.2 22.4 9.4 26"/><circle class="sp" cx="5.6" cy="5.8" r="1.35"/><circle class="sp" cx="8.6" cy="4.2" r=".85"/></g></g><ellipse class="bd" cx="20" cy="17" rx="1.3" ry="7"/><path class="an" d="M19.5 11C18 6 16.5 4 15 3M20.5 11C22 6 23.5 4 25 3"/></g></svg></g>
+        <g class="scale" transform="translate(24 524)"><path d="M0 0H117.4M0-5V0M58.7-3V0M117.4-5V0"/><text x="125.4" y="4">5 mi</text></g><g class="north" transform="translate(36 34)"><path d="M0-14L6 6L0 2L-6 6Z"/><text y="22">N</text></g>
       </svg>
-      <figcaption>Dots sit at each city's real position.</figcaption>
+      <div class="map-card" id="map-card" aria-live="polite">
+        <p class="mc-name" id="mc-name">San Tan Valley</p>
+        <p class="mc-mi" id="mc-mi">Home base. Every visit starts here.</p>
+      </div>
+      <figcaption>Roads, canals and parks from OpenStreetMap. Distances are straight-line from San Tan Valley.</figcaption>
     </figure>
   </div>
 </section>
@@ -516,6 +515,6 @@
 </div>
 
 <script src="assets/reviews.js?v=3" defer></script>
-<script src="assets/app.js?v=3" defer></script>
+<script src="assets/app.js?v=6" defer></script>
 </body>
 </html>
