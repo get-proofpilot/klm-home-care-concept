@@ -9,6 +9,13 @@
   --lav:#D6BCFA;           /* their header lavender */
   --lav-50:#F6F0FF;
   --lav-100:#ECE1FD;
+  --teal:#1DCEC8;           /* Arizona turquoise, from KLM's own site theme */
+  --teal-ink:#0B6B67;       /* turquoise that carries text (6.4:1 on white) */
+  --teal-50:#EAFBF9;
+  --teal-100:#C6F1EC;
+  --sun:#F6B93B;            /* small warm spark: stars, highlights */
+  --sun-100:#FDEBC3;
+  --violet:#8B5CF6;
   --ink:#26142E;           /* aubergine ink */
   --ink-2:#5A4862;
   --ink-3:#7A6981;
@@ -533,3 +540,83 @@ p{margin:0}
   .map .home .sub{font-size:14px}
   .mt{font-size:19px}
 }
+
+/* ---------- v3: turquoise offset, duotone icons, gem-cut buttons ---------- */
+.du{fill:var(--du,var(--teal-100));stroke:none}
+.ico .du{opacity:.95}
+.tile-ico{width:52px;height:52px;stroke-width:1.5}
+.tile-shower{--du:var(--teal)}
+.tile-shower .tile-ico .du{opacity:.55}
+.tile-bed{--du:var(--lav)}
+.tile-brief{--du:var(--teal-100)}
+.tile-toilet{--du:var(--sun-100)}
+.tile-linen{--du:var(--teal-100)}
+.tile-personal{--du:var(--lav-100)}
+.proof li:nth-child(1){--du:var(--sun-100)}
+.proof li:nth-child(2){--du:var(--teal-100)}
+.proof li:nth-child(3){--du:var(--blush-100)}
+.contact-list{--du:rgba(255,255,255,.22)}
+.head-phone{--du:var(--teal-100)}
+.note-chip{--du:var(--teal-100)}
+.svc span{--du:var(--teal-100)}
+.svc input:checked+span{--du:var(--teal)}
+
+/* answer color code: one visit pink, a few weeks turquoise, ongoing violet */
+[data-mode="once"]{--mc:var(--pink);--mc-ink:var(--pink-ink);--mc-50:var(--blush-50)}
+[data-mode="weeks"]{--mc:var(--teal);--mc-ink:var(--teal-ink);--mc-50:var(--teal-50)}
+[data-mode="ongoing"]{--mc:var(--violet);--mc-ink:#6233D3;--mc-50:var(--lav-50)}
+.hl-viz i.o{background:var(--mc)}
+.hl-chip{position:relative}
+.hl-chip:hover{border-color:var(--mc);box-shadow:0 12px 26px -16px var(--mc)}
+.hl-chip b::before{content:"";display:inline-block;width:8px;height:8px;margin-right:7px;vertical-align:1px;background:var(--mc);clip-path:polygon(25% 0,75% 0,100% 40%,50% 100%,0 40%)}
+.planner .cal-day.v{background:var(--mc-50);border-color:var(--mc)}
+.planner .cal-day.v i{background:var(--mc)}
+.planner .cal-day.pick{border-color:var(--mc-ink)}
+.planner .cal-day.pick i{border-color:var(--mc-ink)}
+.planner .pl-sum p b{color:var(--mc-ink)}
+.planner .weeks-row input{accent-color:var(--mc-ink)}
+.pl-mode span::before{content:"";display:inline-block;width:8px;height:8px;margin-right:8px;vertical-align:1px;background:var(--mc);clip-path:polygon(25% 0,75% 0,100% 40%,50% 100%,0 40%)}
+.pl-aside{border-left-color:var(--teal)}
+
+/* turquoise across the page */
+.answers{background:var(--teal-50)}
+.answers .eyebrow,.areas .eyebrow{color:var(--teal-ink)}
+.qa article{border-top-color:var(--teal-100)}
+.sec-head-split a{color:var(--teal-ink)}
+.visit-steps li::before{color:var(--teal)}
+.photo-tag{background:var(--teal-ink)}
+.hero-facts dt{color:var(--teal-ink)}
+.tile-toilet{background:var(--teal-50);border-color:var(--teal-100)}
+.rv-stars i{background:var(--sun)}
+.map .city:not(.home) .gm{fill:var(--teal-ink)}
+.city-list a:hover,.city-list a.hot{border-color:var(--teal-ink);background:var(--teal-50)}
+.social a:hover{background:var(--teal-ink);border-color:var(--teal-ink)}
+.svc input:checked+span{border-color:var(--teal-ink);background:var(--teal-50)}
+.days input:checked+span{background:var(--teal-ink);border-color:var(--teal-ink)}
+.who input:checked+span{background:var(--teal-ink);border-color:var(--teal-ink)}
+.proof{background:#fff;border-color:var(--line)}
+.proof li+li{border-left-color:var(--line)}
+
+/* gem-cut buttons: the logo's diamond facets on each end, a sheen on hover */
+.btn{border-radius:0;--cut:15px;clip-path:polygon(var(--cut) 0,calc(100% - var(--cut)) 0,100% 50%,calc(100% - var(--cut)) 100%,var(--cut) 100%,0 50%);padding:0 34px;position:relative;isolation:isolate;overflow:hidden;box-shadow:none}
+.btn-sm{--cut:11px;padding:0 24px}
+.btn::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,.38) 48%,transparent 66%);transform:translateX(-130%);transition:transform .7s var(--ease-out)}
+.btn:hover::before{transform:translateX(130%)}
+.btn-pink,.btn-pink:hover{box-shadow:none}
+.btn-pink{background:linear-gradient(120deg,#EC1585 0%,var(--pink-ink) 50%,#B9095F 100%)}
+.btn-pink:hover{background:linear-gradient(120deg,#D80F78 0%,var(--pink-deep) 60%,#9A064F 100%)}
+.btn-ink{background:linear-gradient(120deg,#3A2244,var(--ink))}
+.btn-teal{background:linear-gradient(120deg,#0F8781,var(--teal-ink));color:#fff}
+.btn:focus-visible{outline:none;box-shadow:inset 0 0 0 3px rgba(255,255,255,.95),inset 0 0 0 5px var(--ink)}
+.btn .ico{width:1.1em;height:1.1em}
+
+/* text links: the logo's brushstroke, which fills in like a highlighter on hover */
+.tlink{text-decoration:none;padding:2px 4px 5px;margin:0 -4px;background:url(img/brush.webp) 0 100%/100% 8px no-repeat;transition:background-size .35s var(--ease-out)}
+.tlink:hover{background-size:100% 100%}
+
+/* mobile action bar: turquoise call beside the pink consult */
+.mbar-call{border:0;color:#fff;background:linear-gradient(120deg,#0F8781,var(--teal-ink));border-radius:0;clip-path:polygon(11px 0,calc(100% - 11px) 0,100% 50%,calc(100% - 11px) 100%,11px 100%,0 50%);padding:0 24px}
+.consult{background:radial-gradient(120% 140% at 0% 0%,#14938C 0%,var(--teal-ink) 55%,#08504D 100%)}
+.consult .eyebrow-light{color:#BDF3EE}
+.consult-copy p{color:#DDF6F3}
+.consult-form{box-shadow:0 30px 60px -30px rgba(0,40,38,.6)}

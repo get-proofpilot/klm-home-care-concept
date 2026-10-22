@@ -172,8 +172,10 @@
     pill.style.width = on.offsetWidth + "px";
   }
 
+  var plannerEl = $(".planner");
   function setMode(mode) {
     state.mode = mode;
+    plannerEl.dataset.mode = mode;
     modeBtns.forEach(function (b) {
       var on = b.dataset.mode === mode;
       b.setAttribute("aria-selected", String(on));
@@ -370,13 +372,13 @@
       on.style.strokeDasharray = len;
       on.style.strokeDashoffset = len;
       on.getBoundingClientRect();
-      on.style.transition = "stroke-dashoffset .9s cubic-bezier(.5,0,.2,1)";
+      on.style.transition = "stroke-dashoffset .45s cubic-bezier(.5,0,.2,1)";
       on.style.strokeDashoffset = 0;
       // the butterfly follows the same curve, turned to face where it is going
       if (flight) cancelAnimationFrame(flight);
       bf.classList.add("on");
       bf.classList.remove("rest");
-      var t0 = performance.now(), dur = 900;
+      var t0 = performance.now(), dur = 460;
       var step = function (now) {
         var t = Math.min(1, (now - t0) / dur), e = t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
         var p = on.getPointAtLength(e * len), q = on.getPointAtLength(Math.min(len, e * len + 2));
@@ -398,8 +400,8 @@
     // first time the map scrolls into view, fly to Mesa so people see what it does
     if ("IntersectionObserver" in window) {
       var mio = new IntersectionObserver(function (es) {
-        if (es[0].isIntersecting) { mio.disconnect(); setTimeout(function () { pick("mesa"); }, 400); }
-      }, { threshold: .5 });
+        if (es[0].isIntersecting) { mio.disconnect(); pick("mesa"); }
+      }, { threshold: .25 });
       mio.observe(mapEl);
     }
   }
