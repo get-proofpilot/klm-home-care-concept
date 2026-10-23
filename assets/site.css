@@ -1114,12 +1114,12 @@ h2{font-weight:700;letter-spacing:-.015em}
   .hero-art .gem-wrap{width:64%}
 }
 
-/* ---------- big monitors: scale the whole design up instead of floating a narrow column ---------- */
-@media (min-width:1600px){body{zoom:1.1}}
-@media (min-width:1800px){body{zoom:1.22}}
-@media (min-width:2100px){body{zoom:1.36}}
-@media (min-width:2400px){body{zoom:1.55}}
-@media (min-width:3000px){body{zoom:1.85}}
+/* ---------- big monitors: scale the whole design to the screen (--z is set from width AND height) ---------- */
+body{zoom:var(--z,1)}
+@media (min-width:1600px){
+  .care,.visit,.story,.answers,.areas,.reviews{padding-top:100px;padding-bottom:100px}
+  .plan,.consult{padding-top:112px;padding-bottom:112px}
+}
 
 /* ---------- phones: same information, less crowding ---------- */
 @media (max-width:600px){
@@ -1251,3 +1251,21 @@ h2{font-weight:700;letter-spacing:-.015em}
   .foot-brand img{width:150px}
   .foot-base{margin-top:30px;font-size:.78rem}
 }
+
+/* timeline fix: the stops were clipped by an old card rule */
+.pl-timeline .pl-mode{overflow:visible}
+.pl-timeline{padding-top:8px}
+
+/* ---------- nav: the logo's brushstroke marks where you are ---------- */
+.nav{gap:2px}
+.nav a,.nav a:hover,.nav a.on{background:none;border-radius:0;color:var(--ink-2);padding:10px 14px;isolation:isolate;position:relative}
+.nav a::before{content:"";position:absolute;z-index:-1;left:2px;right:2px;top:50%;height:30px;margin-top:-14px;background:url(img/brush.webp) center/100% 100% no-repeat;opacity:.55;clip-path:inset(0 100% 0 0);transition:clip-path .45s var(--ease-out),opacity .25s}
+.nav a:hover{color:var(--ink)}
+.nav a:hover::before{clip-path:inset(0 45% 0 0);opacity:.35}
+.nav a.on{color:var(--ink);font-weight:600}
+.nav a.on::before{clip-path:inset(0 0 0 0);opacity:.6}
+.nav a:focus-visible{outline:2px solid var(--pink-ink);outline-offset:2px;border-radius:6px}
+.head-phone{gap:10px}
+.head-phone .ico{width:34px;height:34px;padding:8px 8px 10px;background:var(--blush-100);clip-path:polygon(22% 4%,78% 4%,100% 38%,50% 100%,0 38%);color:var(--pink-ink);--du:#fff;transition:background-color .2s}
+.head-phone:hover .ico{background:var(--blush)}
+.head-phone span{font-weight:650;letter-spacing:.01em}
