@@ -360,6 +360,45 @@
     location.href = "mailto:klmhomecareservices@gmail.com?subject=" + encodeURIComponent("Free consult request") + "&body=" + encodeURIComponent(body);
   });
 
+  /* ---------- services: tap a spot in the house; until then it tours itself ---------- */
+  var hs = $$(".hs"), sps = $$(".svp"), dots = $$(".sp-dots i"), dotsWrap = $(".sp-dots");
+  if (hs.length) {
+    var TOUR = 4200, tourT = null, touring = false, cur = 0;
+    var showS = function (i) {
+      cur = i;
+      hs.forEach(function (b, k) { var on = k === i; b.setAttribute("aria-selected", String(on)); b.tabIndex = on ? 0 : -1; });
+      sps.forEach(function (sp, k) { sp.hidden = k !== i; sp.classList.toggle("in", k === i); });
+      dots.forEach(function (d, k) { d.classList.toggle("on", k === i); });
+      // restart the progress fill
+      dotsWrap.classList.remove("auto"); void dotsWrap.offsetWidth;
+      if (touring) dotsWrap.classList.add("auto");
+    };
+    var next = function () { showS((cur + 1) % hs.length); };
+    var startTour = function () {
+      if (touring || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      touring = true; dotsWrap.style.setProperty("--tour", TOUR + "ms"); showS(cur);
+      tourT = setInterval(next, TOUR);
+    };
+    var stopTour = function () { touring = false; clearInterval(tourT); dotsWrap.classList.remove("auto"); };
+    hs.forEach(function (b, i) {
+      b.addEventListener("click", function () { stopTour(); showS(i); });
+      b.addEventListener("mouseenter", function () { stopTour(); showS(i); });
+      b.addEventListener("keydown", function (e) {
+        var n = e.key === "ArrowRight" || e.key === "ArrowDown" ? (i + 1) % hs.length : e.key === "ArrowLeft" || e.key === "ArrowUp" ? (i - 1 + hs.length) % hs.length : -1;
+        if (n > -1) { e.preventDefault(); stopTour(); hs[n].focus(); showS(n); }
+      });
+    });
+    showS(0);
+    var stage = $(".room-tour");
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (es) {
+        if (es[0].isIntersecting) { if (!stage.dataset.touched) startTour(); }
+        else stopTour();
+      }, { threshold: .35 }).observe(stage);
+      stage.addEventListener("pointerdown", function () { stage.dataset.touched = "1"; stopTour(); });
+    }
+  }
+
   /* ---------- questions: tap one, it drops into the chat and KLM "types" the answer ---------- */
   var fqs = $$(".fq"), fas = $$(".fa"), typing = $(".typing");
   if (fqs.length) {

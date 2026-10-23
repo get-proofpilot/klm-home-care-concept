@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Quattrocento:wght@400;700&family=Nothing+You+Could+Do&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script>document.documentElement.classList.add("js");try{if(/[?&]nointro/.test(location.search))sessionStorage.setItem("klm_intro","1");if(matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("intro-seen")}catch(e){}setTimeout(function(){document.documentElement.classList.add("hero-go")},5200)</script>
-<link rel="stylesheet" href="assets/site.css?v=29">
+<link rel="stylesheet" href="assets/site.css?v=31">
 </head>
 <body>
 
@@ -135,52 +135,150 @@
   <div class="wrap">
     <div class="sec-head">
       <p class="eyebrow">What we help with</p>
-      <h2>Six kinds of everyday help, from people who do it every day.</h2>
-      <p class="sec-sub">Bathing and incontinence care is our whole focus. That's why families call us when they need it done safely and done right.</p>
+      <h2>Six kinds of help, right where you need it.</h2>
+      <p class="sec-sub">Bathing and incontinence care is our whole focus. Here's where each kind of visit happens in your home.</p>
     </div>
 
-    <div class="bento">
-      <article class="tile tile-shower">
-        <img class="tile-img" src="assets/img/shower-900.webp" width="900" height="600" alt="A bright modern bathroom with a walk-in shower" loading="lazy">
-        <div class="tile-body">
-          <svg class="tile-ico"><use href="#i-shower"/></svg>
-          <h3><a href="#" data-preview-off="1">Shower assistance</a></h3>
-          <p>Steady hands in and out of the shower. Non-slip mat down, grab bars checked, and help with every step so a slip never gets the chance.</p>
+    <div class="room-tour">
+      <div class="house-stage">
+        <div class="house-wrap" role="tablist" aria-label="Care around the home">
+<svg class="house" viewBox="0 0 800 520" role="img" aria-labelledby="house-t" xmlns="http://www.w3.org/2000/svg">
+  <title id="house-t">A home cut open to show a bedroom and a bathroom, with the six kinds of care marked where they happen</title>
+  <g stroke="#26142E" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+    <!-- ground and bushes -->
+    <path d="M10 482H790" fill="none"/>
+    <path d="M32 482c0-20 14-30 28-30s28 10 28 30" fill="#EADCF5"/>
+    <path d="M716 482c0-24 16-36 32-36s32 12 32 36" fill="#FFD3E6"/>
+    <!-- roof and chimney -->
+    <path d="M598 106V62h44v76" fill="#D6BCFA"/>
+    <path d="M40 196L400 42l360 154z" fill="#FC73B1"/>
+    <path d="M120 162L400 66l280 96" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="2"/>
+    <!-- walls -->
+    <rect x="70" y="196" width="330" height="286" fill="#F3EAFE"/>
+    <rect x="400" y="196" width="330" height="286" fill="#FFEFF6"/>
+    <!-- bathroom tiles -->
+    <g stroke="#F7C9DE" stroke-width="1.5" fill="none">
+      <path d="M402 330H728M402 360H728M402 390H728M402 420H728M402 450H728"/>
+      <path d="M432 330V452M462 330V452M492 330V452M522 330V452M552 330V452M582 330V452M612 330V452M642 330V452M672 330V452M702 330V452"/>
+    </g>
+    <!-- floor -->
+    <rect x="70" y="452" width="660" height="30" fill="#E3D2F7"/>
+    <path d="M400 196V482" fill="none"/>
+
+    <!-- BEDROOM -->
+    <!-- wall shelf with folded linens -->
+    <path d="M92 282H170" fill="none"/>
+    <rect x="100" y="262" width="62" height="13" rx="4" fill="#fff"/>
+    <rect x="104" y="249" width="54" height="13" rx="4" fill="#FC73B1"/>
+    <rect x="108" y="236" width="46" height="13" rx="4" fill="#D6BCFA"/>
+    <!-- window with curtains -->
+    <rect x="232" y="226" width="96" height="78" rx="4" fill="#fff"/>
+    <path d="M280 226V304M232 265H328" fill="none" stroke-width="2"/>
+    <path d="M224 222h112" fill="none"/>
+    <path d="M226 224c10 26 4 58 14 86h-18z" fill="#FFD3E6"/>
+    <path d="M334 224c-10 26-4 58-14 86h18z" fill="#FFD3E6"/>
+    <!-- nightstand and lamp -->
+    <rect x="96" y="398" width="52" height="54" rx="4" fill="#fff"/>
+    <path d="M96 424H148" fill="none" stroke-width="2"/>
+    <path d="M122 398v-22" fill="none"/>
+    <path d="M106 376l6-22h20l6 22z" fill="#FC73B1"/>
+    <!-- bed -->
+    <rect x="166" y="352" width="18" height="100" rx="6" fill="#A47BEB"/>
+    <rect x="184" y="398" width="196" height="30" rx="8" fill="#fff"/>
+    <rect x="236" y="390" width="146" height="40" rx="10" fill="#FC73B1"/>
+    <path d="M250 406h118" fill="none" stroke="#fff" stroke-opacity=".6" stroke-width="2"/>
+    <ellipse cx="212" cy="392" rx="24" ry="11" fill="#fff"/>
+    <path d="M190 428v24M372 428v24" fill="none"/>
+    <!-- rug -->
+    <path d="M196 476c40-10 140-10 180 0" fill="none" stroke="#D6BCFA" stroke-width="6"/>
+
+    <!-- BATHROOM -->
+    <!-- mirror and vanity -->
+    <ellipse cx="458" cy="282" rx="30" ry="38" fill="#fff"/>
+    <path d="M444 262l14-12" fill="none" stroke="#D6BCFA" stroke-width="3"/>
+    <rect x="420" y="372" width="78" height="80" rx="4" fill="#fff"/>
+    <path d="M414 372h90" fill="none"/>
+    <path d="M459 372v80M434 404h8M476 404h8" fill="none" stroke-width="2"/>
+    <rect x="428" y="350" width="12" height="22" rx="3" fill="#FC73B1"/>
+    <rect x="444" y="356" width="10" height="16" rx="3" fill="#D6BCFA"/>
+    <path d="M478 372v-16h14" fill="none"/>
+    <!-- toilet with grab bar -->
+    <path d="M522 300h56" fill="none" stroke="#FD288D" stroke-width="5"/>
+    <rect x="534" y="338" width="38" height="44" rx="6" fill="#fff"/>
+    <path d="M524 382h58c0 26-14 40-29 42v28h-22v-30c-6-8-7-22-7-40z" fill="#fff"/>
+    <!-- walk-in shower -->
+    <path d="M700 196v34h-34" fill="none"/>
+    <path d="M652 230h28l6 10h-40z" fill="#D6BCFA"/>
+    <g fill="#FC73B1" stroke="none"><circle cx="656" cy="256" r="3"/><circle cx="666" cy="266" r="3"/><circle cx="676" cy="256" r="3"/><circle cx="660" cy="280" r="3"/><circle cx="674" cy="286" r="3"/></g>
+    <rect x="604" y="216" width="124" height="236" fill="#fff" fill-opacity=".35" stroke-width="2.5"/>
+    <path d="M622 330v54" fill="none" stroke="#FD288D" stroke-width="5"/>
+    <rect x="652" y="404" width="76" height="14" rx="3" fill="#fff"/>
+    <path d="M662 418v34M718 418v34" fill="none" stroke-width="2.5"/>
+    <path d="M610 452h112" fill="none" stroke="#fff" stroke-width="4"/>
+  </g>
+  <!-- butterfly resting on the roof -->
+  <g transform="translate(470 74) rotate(14)">
+    <path d="M0 0C-6-14-18-16-20-8-22-2-12 2 0 1z" fill="#FD288D" stroke="#26142E" stroke-width="1.2"/>
+    <path d="M0 0C6-14 18-16 20-8 22-2 12 2 0 1z" fill="#FC73B1" stroke="#26142E" stroke-width="1.2"/>
+    <path d="M0 2c-5 1-12 6-10 11 2 4 8 0 10-8zM0 2c5 1 12 6 10 11-2 4-8 0-10-8z" fill="#FFC2DD" stroke="#26142E" stroke-width="1.2"/>
+    <path d="M0-6v14" stroke="#26142E" stroke-width="2.4" stroke-linecap="round"/>
+  </g>
+</svg>
+
+          <button class="hs" id="hs-shower" role="tab" aria-selected="true" aria-controls="sp-shower" tabindex="0" style="left:83.2%;top:57.7%"><span class="hs-gem"><svg class="ico"><use href="#i-shower"/></svg></span><span class="hs-label">Shower assistance</span></button>
+          <button class="hs" id="hs-toilet" role="tab" aria-selected="false" aria-controls="sp-toilet" tabindex="-1" style="left:69.1%;top:69.2%"><span class="hs-gem"><svg class="ico"><use href="#i-toilet"/></svg></span><span class="hs-label">Toileting assistance</span></button>
+          <button class="hs" id="hs-personal" role="tab" aria-selected="false" aria-controls="sp-personal" tabindex="-1" style="left:57.3%;top:54.2%"><span class="hs-gem"><svg class="ico"><use href="#i-personal"/></svg></span><span class="hs-label">Personal care</span></button>
+          <button class="hs" id="hs-bed" role="tab" aria-selected="false" aria-controls="sp-bed" tabindex="-1" style="left:26.5%;top:74%"><span class="hs-gem"><svg class="ico"><use href="#i-bedbath"/></svg></span><span class="hs-label">Bed baths</span></button>
+          <button class="hs" id="hs-brief" role="tab" aria-selected="false" aria-controls="sp-brief" tabindex="-1" style="left:38.8%;top:76.9%"><span class="hs-gem"><svg class="ico"><use href="#i-brief"/></svg></span><span class="hs-label">Brief & undergarment changes</span></button>
+          <button class="hs" id="hs-linen" role="tab" aria-selected="false" aria-controls="sp-linen" tabindex="-1" style="left:16.4%;top:47.7%"><span class="hs-gem"><svg class="ico"><use href="#i-linens"/></svg></span><span class="hs-label">Linen changes</span></button>
         </div>
-      </article>
-
-      <article class="tile tile-bed">
-        <svg class="tile-ico"><use href="#i-bedbath"/></svg>
-        <h3><a href="#" data-preview-off="1">Bed baths</a></h3>
-        <p>A full, gentle wash without leaving bed. We keep an eye out for redness or early sores while we're there.</p>
-      </article>
-
-      <article class="tile tile-brief">
-        <svg class="tile-ico"><use href="#i-brief"/></svg>
-        <h3><a href="#" data-preview-off="1">Brief &amp; undergarment changes</a></h3>
-        <p>Discreet, unhurried and on your schedule, so skin stays healthy and nobody feels rushed.</p>
-      </article>
-
-      <article class="tile tile-toilet">
-        <svg class="tile-ico"><use href="#i-toilet"/></svg>
-        <h3><a href="#" data-preview-off="1">Toileting assistance</a></h3>
-        <p>Help with transfers and positioning, and a quiet heads-up to family if something seems off.</p>
-      </article>
-
-      <article class="tile tile-linen">
-        <img class="tile-img" src="assets/img/linens-900.webp" width="600" height="900" alt="Fresh white bed linens" loading="lazy">
-        <div class="tile-body">
-          <svg class="tile-ico"><use href="#i-linens"/></svg>
-          <h3><a href="#" data-preview-off="1">Linen changes</a></h3>
-          <p>Clean sheets, pulled smooth, with soiled linens handled the sanitary way. Daily, weekly, or whenever you need.</p>
+        <p class="house-hint"><span class="tap-dot" aria-hidden="true"></span>Tap a glowing spot to see what that visit covers.</p>
+      </div>
+      <div class="svc-panel" aria-live="polite">
+        <div class="svp" id="sp-shower" role="tabpanel" aria-labelledby="hs-shower">
+          <p class="sp-room">In the bathroom</p>
+          <div class="sp-head"><span class="sp-ico"><svg class="ico"><use href="#i-shower"/></svg></span><h3>Shower assistance</h3></div>
+          <p class="sp-line">Steady hands in and out of the shower, so a slip never gets the chance.</p>
+          <ul class="sp-list"><li>Non-slip mat down and grab bars checked first</li><li>Help with every step and transfer</li><li>Your own soap, shampoo and lotion</li></ul>
+          <a class="tlink" href="#" data-preview-off="1">More about shower assistance</a>
         </div>
-      </article>
-
-      <article class="tile tile-personal">
-        <svg class="tile-ico"><use href="#i-personal"/></svg>
-        <h3><a href="#" data-preview-off="1">Personal care</a></h3>
-        <p>Hair, teeth, shaving, getting dressed. The small routines that make the day feel like yours again.</p>
-      </article>
+        <div class="svp" id="sp-toilet" role="tabpanel" aria-labelledby="hs-toilet" hidden>
+          <p class="sp-room">In the bathroom</p>
+          <div class="sp-head"><span class="sp-ico"><svg class="ico"><use href="#i-toilet"/></svg></span><h3>Toileting assistance</h3></div>
+          <p class="sp-line">Help with transfers and positioning, handled with privacy and respect.</p>
+          <ul class="sp-list"><li>Safe transfers on and off the toilet</li><li>Discreet, unhurried help</li><li>Changes in habits shared with family</li></ul>
+          <a class="tlink" href="#" data-preview-off="1">More about toileting assistance</a>
+        </div>
+        <div class="svp" id="sp-personal" role="tabpanel" aria-labelledby="hs-personal" hidden>
+          <p class="sp-room">In the bathroom</p>
+          <div class="sp-head"><span class="sp-ico"><svg class="ico"><use href="#i-personal"/></svg></span><h3>Personal care</h3></div>
+          <p class="sp-line">The small routines that make a day feel like yours again.</p>
+          <ul class="sp-list"><li>Hair, teeth and shaving</li><li>Getting dressed the way you like</li><li>Help moving safely around the house</li></ul>
+          <a class="tlink" href="#" data-preview-off="1">More about personal care</a>
+        </div>
+        <div class="svp" id="sp-bed" role="tabpanel" aria-labelledby="hs-bed" hidden>
+          <p class="sp-room">In the bedroom</p>
+          <div class="sp-head"><span class="sp-ico"><svg class="ico"><use href="#i-bedbath"/></svg></span><h3>Bed baths</h3></div>
+          <p class="sp-line">A full, gentle wash without leaving bed.</p>
+          <ul class="sp-list"><li>Warm, thorough wash with your products</li><li>Skin checked for redness or early sores</li><li>Each step explained, privacy kept</li></ul>
+          <a class="tlink" href="#" data-preview-off="1">More about bed baths</a>
+        </div>
+        <div class="svp" id="sp-brief" role="tabpanel" aria-labelledby="hs-brief" hidden>
+          <p class="sp-room">In the bedroom</p>
+          <div class="sp-head"><span class="sp-ico"><svg class="ico"><use href="#i-brief"/></svg></span><h3>Brief & undergarment changes</h3></div>
+          <p class="sp-line">Discreet changes on your schedule, so skin stays healthy.</p>
+          <ul class="sp-list"><li>Quick, respectful changes</li><li>Skin watched for irritation</li><li>Fits into your daily routine</li></ul>
+          <a class="tlink" href="#" data-preview-off="1">More about brief changes</a>
+        </div>
+        <div class="svp" id="sp-linen" role="tabpanel" aria-labelledby="hs-linen" hidden>
+          <p class="sp-room">In the bedroom</p>
+          <div class="sp-head"><span class="sp-ico"><svg class="ico"><use href="#i-linens"/></svg></span><h3>Linen changes</h3></div>
+          <p class="sp-line">Clean sheets, pulled smooth, handled the sanitary way.</p>
+          <ul class="sp-list"><li>Soiled linens handled hygienically</li><li>Fresh, wrinkle-free bedding</li><li>Daily, weekly or when you need it</li></ul>
+          <a class="tlink" href="#" data-preview-off="1">More about linen changes</a>
+        </div>
+        <div class="sp-dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      </div>
     </div>
   </div>
 </section>
@@ -608,6 +706,6 @@
 </div>
 
 <script src="assets/reviews.js?v=3" defer></script>
-<script src="assets/app.js?v=17" defer></script>
+<script src="assets/app.js?v=19" defer></script>
 </body>
 </html>

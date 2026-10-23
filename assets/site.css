@@ -1046,3 +1046,56 @@ h2{font-weight:700;letter-spacing:-.015em}
   .scrapbook{margin-top:10px}
   .hero-media::after{background:linear-gradient(180deg,rgba(255,250,248,.2) 0%,rgba(255,250,248,.78) 42%,rgba(255,250,248,.88) 100%)}
 }
+
+/* ---------- services: a cutaway home with a spot for each kind of visit ---------- */
+.room-tour{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(20px,3vw,36px);align-items:center}
+.house-stage{position:relative;padding:clamp(18px,3vw,34px) clamp(14px,2.4vw,28px) 16px;border-radius:32px;background:radial-gradient(120% 90% at 30% 20%,#fff 0%,var(--lav-50) 55%,var(--blush-50) 100%);border:1px solid var(--plum-100);overflow:hidden}
+.house-stage::before{content:"";position:absolute;left:-12%;bottom:-6%;width:80%;height:46%;background:url(img/brush.webp) center/contain no-repeat;opacity:.14;transform:rotate(-6deg);pointer-events:none}
+.house-wrap{position:relative}
+.house{display:block;width:100%;height:auto;position:relative}
+.hs{position:absolute;transform:translate(-50%,-50%);border:0;background:none;padding:0;cursor:pointer;z-index:2}
+.hs-gem{position:relative;display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:#fff;box-shadow:0 0 0 3px var(--pink-ink),0 12px 22px -10px rgba(212,9,110,.7);transition:transform .3s var(--ease-out),background-color .3s}
+.hs-gem::before{content:"";position:absolute;inset:-7px;border-radius:50%;border:2px solid var(--pink);opacity:0;animation:ring 2.4s var(--ease-out) infinite}
+.hs:nth-of-type(2) .hs-gem::before{animation-delay:.4s}.hs:nth-of-type(3) .hs-gem::before{animation-delay:.8s}.hs:nth-of-type(4) .hs-gem::before{animation-delay:1.2s}.hs:nth-of-type(5) .hs-gem::before{animation-delay:1.6s}.hs:nth-of-type(6) .hs-gem::before{animation-delay:2s}
+@keyframes ring{0%{transform:scale(.8);opacity:.7}100%{transform:scale(1.5);opacity:0}}
+.hs-gem .ico{width:25px;height:25px;color:var(--ink);--du:var(--blush-100);stroke-width:1.7}
+.hs:hover .hs-gem{transform:scale(1.1)}
+.hs[aria-selected="true"] .hs-gem{background:var(--pink-ink);transform:scale(1.16)}
+.hs[aria-selected="true"] .hs-gem .ico{color:#fff;--du:rgba(255,255,255,.25)}
+.hs[aria-selected="true"] .hs-gem .ico .ac{stroke:#FFD3E6}
+.hs[aria-selected="true"] .hs-gem::before{animation:none}
+.hs-label{position:absolute;left:50%;bottom:calc(100% + 10px);transform:translate(-50%,6px);white-space:nowrap;background:var(--ink);color:#fff;font:600 .8rem/1 var(--f-body);padding:8px 11px;border-radius:999px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s var(--ease-out)}
+.hs:hover .hs-label,.hs:focus-visible .hs-label,.hs[aria-selected="true"] .hs-label{opacity:1;transform:translate(-50%,0)}
+.hs:focus-visible{outline:none}
+.hs:focus-visible .hs-gem{box-shadow:0 0 0 3px #fff,0 0 0 6px var(--ink)}
+.house-hint{position:relative;display:flex;align-items:center;gap:10px;justify-content:center;margin-top:10px;font-size:.92rem;color:var(--ink-2)}
+.tap-dot{width:10px;height:10px;border-radius:50%;background:var(--pink-ink);box-shadow:0 0 0 4px var(--blush-100)}
+
+.svc-panel{position:relative;background:#fff;border:1px solid var(--line);border-radius:28px;padding:clamp(24px,3vw,36px);box-shadow:0 30px 60px -40px rgba(38,20,46,.5);min-height:420px;display:flex;flex-direction:column}
+.svc-panel::before{content:"";position:absolute;right:22px;top:22px;width:72px;height:72px;background:url(img/pattern-gems.svg) 0 0/160px;opacity:.6;border-radius:50%}
+.svp{display:flex;flex-direction:column;gap:14px;flex:1}
+.svp[hidden]{display:none}
+.svp.in{animation:rise .45s var(--ease-out) both}
+.sp-room{font:700 .74rem/1 var(--f-body);letter-spacing:.14em;text-transform:uppercase;color:var(--plum-ink)}
+.sp-head{display:flex;align-items:center;gap:16px}
+.sp-ico{flex:none;display:grid;place-items:center;width:66px;height:66px;background:var(--blush-100);clip-path:polygon(22% 4%,78% 4%,100% 38%,50% 100%,0 38%)}
+.sp-ico .ico{width:32px;height:32px;margin-top:-8px;color:var(--ink);--du:#fff;stroke-width:1.6}
+.sp-head h3{font:700 clamp(1.5rem,1.2rem + 1vw,2rem)/1.1 var(--f-display);letter-spacing:-.015em}
+.sp-line{font-size:1.1rem;line-height:1.55;color:var(--ink-2)}
+.sp-list{list-style:none;padding:0;margin:4px 0 6px;display:flex;flex-direction:column;gap:10px}
+.sp-list li{display:flex;gap:12px;align-items:baseline;font-weight:500}
+.sp-list li::before{content:"";flex:none;width:11px;height:11px;transform:translateY(1px);background:var(--pink-ink);clip-path:polygon(22% 4%,78% 4%,100% 38%,50% 100%,0 38%)}
+.svp .tlink{align-self:flex-start;margin-top:auto}
+.sp-dots{display:flex;gap:6px;margin-top:22px}
+.sp-dots i{height:6px;width:18px;border-radius:3px;background:var(--plum-100);overflow:hidden;position:relative;transition:width .3s}
+.sp-dots i.on{width:40px;background:var(--blush-100)}
+.sp-dots i.on::after{content:"";position:absolute;inset:0;background:var(--pink-ink);transform-origin:left;transform:scaleX(1)}
+.sp-dots.auto i.on::after{animation:dotfill var(--tour,4.2s) linear both}
+@keyframes dotfill{from{transform:scaleX(0)}}
+@media (max-width:1000px){.room-tour{grid-template-columns:1fr}.svc-panel{min-height:0}}
+@media (max-width:600px){
+  .hs-gem{width:34px;height:34px;box-shadow:0 0 0 2px var(--pink-ink),0 8px 14px -8px rgba(212,9,110,.7)}
+  .hs-gem .ico{width:18px;height:18px}
+  .hs-label{display:none}
+  .house-stage{padding:12px 8px 12px;border-radius:22px}
+}
