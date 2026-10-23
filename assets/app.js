@@ -408,6 +408,7 @@
       fqs.forEach(function (b) { var on = b === btn; b.setAttribute("aria-selected", String(on)); b.tabIndex = on ? 0 : -1; });
       var panel = document.getElementById(btn.getAttribute("aria-controls"));
       fas.forEach(function (f) { f.hidden = f !== panel; f.classList.remove("in"); });
+      var hello = $("#fa-hello"); if (hello) hello.hidden = true;
       if (!animate) return;
       var ba = $(".ba", panel);
       ba.style.visibility = "hidden";
@@ -427,7 +428,8 @@
         if (n) { e.preventDefault(); n.focus(); showQ(n, true); }
       });
     });
-    showQ(fqs[0], false);
+    // nothing is answered until someone taps a question
+    fas.forEach(function (f) { f.hidden = true; });
   }
 
   /* ---------- reviews: real ones from reviews.js, invite when empty ---------- */

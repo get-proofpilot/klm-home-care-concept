@@ -1276,3 +1276,16 @@ body{zoom:var(--z,1)}
 .hb-ico{background:linear-gradient(120deg,#EC1585 0%,var(--pink-ink) 50%,#B9095F 100%)}
 .hb-ico .ico{color:#fff;--du:rgba(255,255,255,.28)}
 .hb-ico .ico .ac{stroke:#FFD3E6}
+
+/* question cards: no answers on the cards, just a cue to tap */
+.fq-go{display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:var(--plum-50);color:var(--plum-ink);transition:background-color .2s,color .2s,transform .25s var(--ease-out)}
+.fq-go .ico{width:17px;height:17px;--du:transparent}
+.fq:hover .fq-go{transform:translateX(3px);background:var(--blush-100);color:var(--pink-ink)}
+.fq[aria-selected="true"] .fq-go{background:var(--qc);color:#fff;transform:rotate(0)}
+.fa-hello[hidden]{display:none}
+.fa-hello .bubble{animation:popL .4s var(--ease-out) both}
+@media (max-width:600px){
+  .fq{grid-template-columns:auto 1fr auto;row-gap:0}
+  .fq-ico{grid-row:auto}
+  .fq-go{width:30px;height:30px}
+}

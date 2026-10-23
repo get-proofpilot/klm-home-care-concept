@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Quattrocento:wght@400;700&family=Nothing+You+Could+Do&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script>(function(){function z(){var w=innerWidth,h=innerHeight,k=w<1600?1:Math.min(w/1440,h/900)*.9;k=Math.max(1,Math.min(1.6,k));document.documentElement.style.setProperty("--z",k.toFixed(3))}z();addEventListener("resize",z)})();document.documentElement.classList.add("js");try{if(/[?&]nointro/.test(location.search))sessionStorage.setItem("klm_intro","1");if(matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("intro-seen")}catch(e){}setTimeout(function(){document.documentElement.classList.add("hero-go")},5200)</script>
-<link rel="stylesheet" href="assets/site.css?v=38">
+<link rel="stylesheet" href="assets/site.css?v=40">
 </head>
 <body>
 
@@ -457,39 +457,38 @@
         <p class="eyebrow">Straight answers</p>
         <h2>The questions families ask us first.</h2>
       </div>
-      <p class="sec-sub">Tap a question. The short answer is right on the button; the full one opens in the chat.</p>
     </div>
     <div class="faq">
       <div class="faq-qs" role="tablist" aria-label="Common questions">
-        <button class="fq" role="tab" id="fq-ins" aria-controls="fa-ins" aria-selected="true" tabindex="0">
+        <button class="fq" role="tab" id="fq-ins" aria-controls="fa-ins" aria-selected="false" tabindex="0">
           <span class="fq-ico" aria-hidden="true"><svg class="ico"><use href="#i-shield"/></svg></span>
           <span class="fq-text">Does insurance cover it?</span>
-          <span class="fq-short">Usually not</span>
+          <span class="fq-go" aria-hidden="true"><svg class="ico"><use href="#i-arrow"/></svg></span>
         </button>
         <button class="fq" role="tab" id="fq-one" aria-controls="fa-one" aria-selected="false" tabindex="-1">
           <span class="fq-ico" aria-hidden="true"><svg class="ico"><use href="#i-cal"/></svg></span>
           <span class="fq-text">Can I book just one visit?</span>
-          <span class="fq-short">Yes</span>
+          <span class="fq-go" aria-hidden="true"><svg class="ico"><use href="#i-arrow"/></svg></span>
         </button>
         <button class="fq" role="tab" id="fq-full" aria-controls="fa-full" aria-selected="false" tabindex="-1">
           <span class="fq-ico" aria-hidden="true"><svg class="ico"><use href="#i-gem"/></svg></span>
           <span class="fq-text">Do you offer full-time caregiving?</span>
-          <span class="fq-short">No, by design</span>
+          <span class="fq-go" aria-hidden="true"><svg class="ico"><use href="#i-arrow"/></svg></span>
         </button>
         <button class="fq" role="tab" id="fq-consult" aria-controls="fa-consult" aria-selected="false" tabindex="-1">
           <span class="fq-ico" aria-hidden="true"><svg class="ico"><use href="#i-home"/></svg></span>
           <span class="fq-text">What happens at the free consult?</span>
-          <span class="fq-short">Free, at home</span>
+          <span class="fq-go" aria-hidden="true"><svg class="ico"><use href="#i-arrow"/></svg></span>
         </button>
         <button class="fq" role="tab" id="fq-pay" aria-controls="fa-pay" aria-selected="false" tabindex="-1">
           <span class="fq-ico" aria-hidden="true"><svg class="ico"><use href="#i-card"/></svg></span>
           <span class="fq-text">How do I pay?</span>
-          <span class="fq-short">Weekly or monthly</span>
+          <span class="fq-go" aria-hidden="true"><svg class="ico"><use href="#i-arrow"/></svg></span>
         </button>
         <button class="fq" role="tab" id="fq-train" aria-controls="fa-train" aria-selected="false" tabindex="-1">
           <span class="fq-ico" aria-hidden="true"><svg class="ico"><use href="#i-badge"/></svg></span>
           <span class="fq-text">How are caregivers trained?</span>
-          <span class="fq-short">Certified</span>
+          <span class="fq-go" aria-hidden="true"><svg class="ico"><use href="#i-arrow"/></svg></span>
         </button>
       </div>
       <div class="faq-chat">
@@ -521,6 +520,9 @@
           <div class="fa" role="tabpanel" id="fa-train" aria-labelledby="fq-train">
             <p class="bubble bq">How are caregivers trained?</p>
             <p class="bubble ba">Every KLM caregiver is certified through a training and testing process before they work with clients, and keeps learning through our annual caregiver support program.</p>
+          </div>
+          <div class="fa-hello" id="fa-hello">
+            <p class="bubble ba">Hi! Tap any question and we'll answer it right here.</p>
           </div>
           <p class="typing" aria-hidden="true"><i></i><i></i><i></i></p>
         </div>
@@ -706,6 +708,6 @@
 </div>
 
 <script src="assets/reviews.js?v=3" defer></script>
-<script src="assets/app.js?v=20" defer></script>
+<script src="assets/app.js?v=22" defer></script>
 </body>
 </html>
