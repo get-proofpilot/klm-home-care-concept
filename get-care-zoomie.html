@@ -15,7 +15,7 @@
 <script>document.documentElement.classList.add("js","intro-seen","hero-go")</script>
 <link rel="stylesheet" href="assets/site.css?v=42">
 <link rel="stylesheet" href="assets/get-care.css?v=1">
-<link rel="stylesheet" href="assets/get-care-zoomie.css?v=2">
+<link rel="stylesheet" href="assets/get-care-zoomie.css?v=4">
 </head>
 <body class="gc zm">
 
@@ -132,40 +132,44 @@
 </section>
 
 <section class="zm-steps" id="steps">
-  <img class="zm-prop zm-prop-tooth" src="assets/img/zm/toothbrush.webp" alt="" loading="lazy">
-  <svg class="zm-prop zm-prop-star" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 4l9 25 24-12-11 24 25 9-25 9 11 24-24-12-9 25-9-25-24 12 11-24-25-9 25-9-11-24 24 12z" fill="#FF6FA8" stroke="#26142E" stroke-width="3" stroke-linejoin="round"/></svg>
-  <div class="wrap">
-    <h2 class="zm-h">How a Visit Comes Together</h2>
-    <p class="zm-sub">Four quick steps from your first message to a caregiver at your door.</p>
-    <div class="zm-deck" id="deck">
-        <article class="zm-card c-deep" data-i="1">
+  <div class="zm-steps-pin">
+    <img class="zm-prop zm-prop-tooth" src="assets/img/zm/toothbrush.webp" alt="" loading="lazy">
+    <svg class="zm-prop zm-prop-star" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 4l9 25 24-12-11 24 25 9-25 9 11 24-24-12-9 25-9-25-24 12 11-24-25-9 25-9-11-24 24 12z" fill="#FF6FA8" stroke="#26142E" stroke-width="3" stroke-linejoin="round"/></svg>
+    <div class="wrap">
+      <h2 class="zm-h">How a Visit Comes Together</h2>
+      <p class="zm-sub">Four quick steps from your first message to a caregiver at your door.</p>
+    </div>
+    <div class="zm-track" id="track">
+      <article class="zm-card c-deep" data-i="1">
           <p class="zm-card-k">Step 1 of 4</p>
           <h3>You send a request.</h3>
           <p>Write a sentence or tick a few boxes. It takes about a minute, for yourself or for a parent across town.</p>
           <img src="assets/img/zm/phone.webp" alt="" loading="lazy">
         </article>
-        <article class="zm-card c-pink" data-i="2">
+      <article class="zm-card c-pink" data-i="2">
           <p class="zm-card-k">Step 2 of 4</p>
           <h3>We sit down for a free consult.</h3>
           <p>At your kitchen table we talk through the care, the days that work and how you'd like to pay. No cost, no commitment.</p>
           <img src="assets/img/zm/teacup.webp" alt="" loading="lazy">
         </article>
-        <article class="zm-card c-sun" data-i="3">
+      <article class="zm-card c-sun" data-i="3">
           <p class="zm-card-k">Step 3 of 4</p>
           <h3>You get a plan in writing.</h3>
           <p>Your care plan lists every visit, and we match you with a caregiver who fits.</p>
           <img src="assets/img/zm/clipboard.webp" alt="" loading="lazy">
         </article>
-        <article class="zm-card c-lav" data-i="4">
+      <article class="zm-card c-lav" data-i="4">
           <p class="zm-card-k">Step 4 of 4</p>
           <h3>Your caregiver arrives.</h3>
           <p>On the days you picked, with the mat down before the water runs.</p>
           <img src="assets/img/zm/duck.webp" alt="" loading="lazy">
         </article>
-      <p class="zm-bubble" aria-hidden="true">Drag for the next step</p>
-      <button type="button" class="zm-deck-next" id="deck-next">Next step</button>
+      <div class="zm-track-end">
+        <p>Plans can change any time after the consult.</p>
+        <a class="zm-pill" href="#request">Start your request</a>
+      </div>
     </div>
-    <p class="zm-note">Plans can change any time after the consult.</p>
+    <div class="zm-progress" aria-hidden="true"><span id="track-bar"></span></div>
   </div>
 </section>
 
@@ -335,6 +339,6 @@
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="zm-heart" viewBox="0 0 24 24"><path d="M12 21C4 15.5 2 11.5 3.5 8 5 4.6 9.6 4.3 12 7.6 14.4 4.3 19 4.6 20.5 8 22 11.5 20 15.5 12 21z" fill="#FF6FA8" stroke="#26142E" stroke-width="1.4" stroke-linejoin="round"/></symbol></svg>
 <div class="gc-toast" id="toast" role="status"></div>
-<script src="assets/get-care-zoomie.js?v=1"></script>
+<script src="assets/get-care-zoomie.js?v=2"></script>
 </body>
 </html>

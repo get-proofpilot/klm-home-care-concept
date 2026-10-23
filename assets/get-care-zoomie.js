@@ -125,38 +125,24 @@
     });
   });
 
-  /* card deck: drag the top card away, it goes to the back */
-  var deck = $("#deck"), cards = $$(".zm-card", deck), TILT = [0, -5, 4, -8];
-  function lay() {
-    cards.forEach(function (c, i) {
-      c.style.zIndex = 10 - i;
-      c.style.transform = "translateY(" + (i * -14) + "px) rotate(" + TILT[i] + "deg) scale(" + (1 - i * .03) + ")";
-      c.setAttribute("aria-hidden", i ? "true" : "false");
-    });
+  /* steps: vertical scroll drives the card row sideways while the section is pinned */
+  var steps = $("#steps"), track = $("#track"), bar = $("#track-bar"), dist = 0;
+  function size() {
+    if (reduce) { steps.style.height = ""; return; }
+    dist = Math.max(0, track.scrollWidth - window.innerWidth);
+    steps.style.height = (window.innerHeight + dist) + "px";
+    move();
   }
-  function cycle(dir) {
-    var top = cards[0];
-    top.style.transform = "translateX(" + (dir * 130) + "%) rotate(" + (dir * 24) + "deg)";
-    top.style.opacity = "0";
-    setTimeout(function () { cards.push(cards.shift()); top.style.opacity = ""; lay(); }, reduce ? 0 : 320);
+  function move() {
+    var r = steps.getBoundingClientRect(), span = steps.offsetHeight - window.innerHeight;
+    var p = span > 0 ? Math.min(1, Math.max(0, -r.top / span)) : 0;
+    track.style.transform = "translate3d(" + (-p * dist) + "px,0,0)";
+    bar.style.transform = "scaleX(" + p + ")";
   }
-  lay();
-  var sx = 0, dx = 0, drag = null;
-  deck.addEventListener("pointerdown", function (e) {
-    if (e.target.closest("button") || e.target.closest(".zm-card") !== cards[0]) return;
-    drag = cards[0]; sx = e.clientX; dx = 0; drag.classList.add("dragging"); drag.setPointerCapture(e.pointerId);
-  });
-  deck.addEventListener("pointermove", function (e) {
-    if (!drag) return; dx = e.clientX - sx;
-    drag.style.transform = "translateX(" + dx + "px) rotate(" + (dx / 14) + "deg)";
-  });
-  function end() {
-    if (!drag) return; drag.classList.remove("dragging");
-    if (Math.abs(dx) > 90) cycle(dx > 0 ? 1 : -1); else lay();
-    drag = null;
-  }
-  deck.addEventListener("pointerup", end); deck.addEventListener("pointercancel", end);
-  $("#deck-next").addEventListener("click", function () { cycle(1); });
+  window.addEventListener("resize", size);
+  window.addEventListener("load", size);
+  if (!reduce) window.addEventListener("scroll", function () { requestAnimationFrame(move); }, { passive: true });
+  size();
 
   go(0); render();
 })();
