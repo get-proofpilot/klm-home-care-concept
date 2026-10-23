@@ -325,6 +325,13 @@
   window.addEventListener("resize", placePill);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(placePill);
   setMode(state.mode);
+  if ("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    plannerEl.classList.add("pre");
+    var pio = new IntersectionObserver(function (es) {
+      if (es[0].isIntersecting) { pio.disconnect(); requestAnimationFrame(function () { plannerEl.classList.remove("pre"); }); }
+    }, { threshold: .15 });
+    pio.observe(plannerEl);
+  }
 
   /* ---------- consult form ---------- */
   var form = $("#consult-form"), status = $("#f-status");
@@ -398,15 +405,54 @@
         + "<figcaption><b>" + esc(r.name || "Google reviewer") + "</b>" + (r.when ? "<span>" + esc(r.when) + "</span>" : "") + "</figcaption></figure>";
     }).join("");
     $("#rv-wall").hidden = false;
+    // the hero badge shows the real Google rating once reviews exist
+    var hb = $("#hero-badge");
+    if (hb) {
+      hb.classList.add("hb-reviews");
+      hb.innerHTML = '<span class="g-stars" style="--pct:' + (avg / 5 * 100) + '%" aria-hidden="true"></span>'
+        + '<span class="hb-text"><b>' + avg.toFixed(1) + ' on Google</b><small>' + reviews.length + ' review' + (reviews.length > 1 ? "s" : "") + ' from local families</small></span>';
+    }
     // the invite stays below the wall, but smaller, as a running ask
     $("#rv-invite").classList.add("rv-invite-compact");
   }
 
-  /* ---------- map: pick a city, the butterfly flies the route from home base ---------- */
+  /* ---------- map: every route draws itself and a butterfly settles at each city ---------- */
   var mapEl = $("#map");
   if (mapEl) {
-    var on = $("#rt-on"), bf = $("#map-bf"), card = { n: $("#mc-name"), m: $("#mc-mi") };
-    var flight;
+    var on = $("#rt-on"), proto = $("#map-bf"), card = { n: $("#mc-name"), m: $("#mc-mi") };
+    var order = ["qc", "gc", "aj", "gil", "cha", "mesa"];
+    var flyers = {};
+    // one butterfly per city, cloned from the template in the SVG
+    order.forEach(function (k) {
+      var b = proto.cloneNode(true);
+      b.removeAttribute("id");
+      b.dataset.city = k;
+      proto.parentNode.insertBefore(b, proto);
+      flyers[k] = b;
+    });
+    proto.style.display = "none";
+
+    var PERCH = { mesa: [-18, -14], cha: [-18, -14], gil: [-18, -14], qc: [18, -14], aj: [18, -14], gc: [20, 8] };
+    var fly = function (bf, path, dur, delay) {
+      var len = path.getTotalLength(), t0 = null;
+      bf.classList.remove("rest");
+      var step = function (now) {
+        if (t0 === null) t0 = now + delay;
+        var t = Math.max(0, Math.min(1, (now - t0) / dur));
+        if (now < t0) { requestAnimationFrame(step); return; }
+        bf.classList.add("on");
+        var e = t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+        var p = path.getPointAtLength(e * len), q = path.getPointAtLength(Math.min(len, e * len + 2));
+        var ang = t < 1 ? Math.atan2(q.y - p.y, q.x - p.x) * 180 / Math.PI + 90 : 10;
+        // land beside the marker, on the side away from its label
+        var off = PERCH[bf.dataset.city] || [0, -18];
+        var x = p.x + off[0] * e, y = p.y - 18 + (off[1] + 18) * e;
+        bf.setAttribute("transform", "translate(" + x.toFixed(1) + " " + y.toFixed(1) + ") rotate(" + ang.toFixed(1) + ")");
+        if (t < 1) requestAnimationFrame(step); else bf.classList.add("rest");
+      };
+      requestAnimationFrame(step);
+    };
+
     var pick = function (key) {
       $$(".map .city").forEach(function (g) { g.classList.toggle("on", g.dataset.city === key); });
       $$(".city-list a").forEach(function (a) { a.classList.toggle("hot", a.dataset.city === key); });
@@ -414,34 +460,21 @@
       if (!g) return;
       card.n.textContent = g.dataset.name;
       if (key === "stv") {
-        card.m.innerHTML = "Home base. All seven cities sit within <b>23 miles</b>.";
+        card.m.innerHTML = "Seven cities, all within <b>23 miles</b> of San Tan Valley.";
         on.setAttribute("d", "");
-        bf.classList.remove("on");
         return;
       }
-      card.m.innerHTML = "About <b>" + g.dataset.mi + " miles</b> from our San Tan Valley home base.";
+      card.m.innerHTML = "About <b>" + g.dataset.mi + " miles</b> from San Tan Valley.";
       var rt = $('.map .rt[data-city="' + key + '"]');
       on.setAttribute("d", rt.getAttribute("d"));
       var len = on.getTotalLength();
+      on.style.transition = "none";
       on.style.strokeDasharray = len;
       on.style.strokeDashoffset = len;
       on.getBoundingClientRect();
       on.style.transition = "stroke-dashoffset .45s cubic-bezier(.5,0,.2,1)";
       on.style.strokeDashoffset = 0;
-      // the butterfly follows the same curve, turned to face where it is going
-      if (flight) cancelAnimationFrame(flight);
-      bf.classList.add("on");
-      bf.classList.remove("rest");
-      var t0 = performance.now(), dur = 460;
-      var step = function (now) {
-        var t = Math.min(1, (now - t0) / dur), e = t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
-        var p = on.getPointAtLength(e * len), q = on.getPointAtLength(Math.min(len, e * len + 2));
-        var ang = Math.atan2(q.y - p.y, q.x - p.x) * 180 / Math.PI + 90;
-        bf.setAttribute("transform", "translate(" + p.x.toFixed(1) + " " + (p.y - 16).toFixed(1) + ") rotate(" + (t < 1 ? ang : 12).toFixed(1) + ")");
-        if (t < 1) flight = requestAnimationFrame(step);
-        else bf.classList.add("rest");
-      };
-      flight = requestAnimationFrame(step);
+      fly(flyers[key], rt, 460, 0);
     };
     $$(".map .city").forEach(function (g) {
       g.addEventListener("mouseenter", function () { pick(g.dataset.city); });
@@ -451,6 +484,7 @@
       a.addEventListener("mouseenter", function () { pick(a.dataset.city); });
       a.addEventListener("focus", function () { pick(a.dataset.city); });
     });
+
     // name plaques: a pill sized to each label, drawn behind it
     var plaques = function () {
       $$(".map .city").forEach(function (g) {
@@ -458,7 +492,7 @@
         $$("text", g).forEach(function (t) {
           var b = t.getBBox(), padX = 9, padY = 5;
           var r = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-          r.setAttribute("class", "pq" + (t.classList.contains("sub") ? " pq-sub" : ""));
+          r.setAttribute("class", "pq");
           r.setAttribute("x", (b.x - padX).toFixed(1));
           r.setAttribute("y", (b.y - padY).toFixed(1));
           r.setAttribute("width", (b.width + padX * 2).toFixed(1));
@@ -471,21 +505,21 @@
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(plaques); else plaques();
     addEventListener("resize", function () { clearTimeout(plaques.t); plaques.t = setTimeout(plaques, 200); });
 
-    // on first view, every route draws out from home base and each city's plaque pops in as its route arrives
-    var order = ["qc", "gc", "aj", "gil", "cha", "mesa"];
+    // first view: routes draw out one after another, a butterfly rides each, plaques pop in as they land
     var tour = function () {
       mapEl.classList.remove("pre");
       order.forEach(function (k, i) {
         var rt = $('.map .rt[data-city="' + k + '"]'), g = $('.map .city[data-city="' + k + '"]');
-        var len = rt.getTotalLength(), delay = 120 + i * 140;
-        rt.animate([{ strokeDashoffset: len }, { strokeDashoffset: 0 }], { duration: 520, delay: delay, easing: "cubic-bezier(.5,0,.2,1)", fill: "backwards" });
+        var len = rt.getTotalLength(), delay = 120 + i * 150;
         rt.style.strokeDasharray = len;
+        rt.animate([{ strokeDashoffset: len }, { strokeDashoffset: 0 }], { duration: 560, delay: delay, easing: "cubic-bezier(.5,0,.2,1)", fill: "backwards" });
         var m = (g.getAttribute("transform") || "").match(/translate\(([-\d.]+)[ ,]+([-\d.]+)\)/);
         var tx = m ? +m[1] : 0, ty = m ? +m[2] : 0;
         g.animate([
           { opacity: 0, transform: "translate(" + tx + "px," + (ty + 10) + "px)" },
           { opacity: 1, transform: "translate(" + tx + "px," + ty + "px)" }
-        ], { duration: 420, delay: delay + 420, easing: "cubic-bezier(.3,1.4,.5,1)", fill: "backwards" });
+        ], { duration: 420, delay: delay + 440, easing: "cubic-bezier(.3,1.4,.5,1)", fill: "backwards" });
+        fly(flyers[k], rt, 560, delay);
       });
     };
     if ("IntersectionObserver" in window && mapEl.animate) {
@@ -494,8 +528,25 @@
         if (es[0].isIntersecting) { mio.disconnect(); tour(); }
       }, { threshold: .25 });
       mio.observe(mapEl);
+      // fallback for browsers that throttle observers: check on scroll too
+      var started = false, check = function () {
+        if (started || !mapEl.classList.contains("pre")) { removeEventListener("scroll", check); return; }
+        var r = mapEl.getBoundingClientRect();
+        if (r.top < innerHeight * .8 && r.bottom > 0) { started = true; mio.disconnect(); tour(); }
+      };
+      addEventListener("scroll", check, { passive: true });
+      setTimeout(check, 600);
+    } else {
+      order.forEach(function (k) { var rt = $('.map .rt[data-city="' + k + '"]'); fly(flyers[k], rt, 1, 0); });
     }
   }
+
+  /* the review card's stars fill in when it scrolls into view */
+  var mock = $(".rv-mock");
+  if (mock && "IntersectionObserver" in window) {
+    var rio = new IntersectionObserver(function (es) { if (es[0].isIntersecting) { rio.disconnect(); mock.classList.add("go"); } }, { threshold: .4 });
+    rio.observe(mock);
+  } else if (mock) { mock.classList.add("go"); }
 
   /* ---------- reveal ---------- */
   if ("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
