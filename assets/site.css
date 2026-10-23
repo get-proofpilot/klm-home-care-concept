@@ -1289,3 +1289,39 @@ body{zoom:var(--z,1)}
   .fq-ico{grid-row:auto}
   .fq-go{width:30px;height:30px}
 }
+
+/* ---------- section transitions and wallpapers ---------- */
+/* planner: its own wallpaper, which hands off to the visit's hearts and gems */
+.plan{background:url(img/pattern-plan.svg) 0 0/160px 160px,linear-gradient(160deg,var(--lav-50) 0%,#FBF5FF 55%,var(--blush-50) 100%)}
+.plan>.wrap{position:relative;z-index:1}
+.plan-blend{position:absolute;left:0;right:0;bottom:0;height:min(420px,40%);background:url(img/pattern-gems.svg) 0 100%/160px 160px,var(--blush-50);-webkit-mask:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.35) 40%,#000 85%);mask:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.35) 40%,#000 85%);pointer-events:none;z-index:0}
+.visit{background-position:0 0}
+
+/* torn paper with a soft shadow under the tear */
+.tear{position:absolute;left:0;right:0;height:clamp(40px,6vw,88px);z-index:3;pointer-events:none;filter:drop-shadow(0 -3px 4px rgba(70,30,90,.10))}
+.tear .edge{position:absolute;inset:0;height:100%}
+.tear-bottom{bottom:-1px}
+.tear-top{top:-1px;filter:drop-shadow(0 4px 4px rgba(70,30,90,.12))}
+.tear-top .edge{transform:scale(-1,-1)}
+.story{background:var(--ground)}
+
+/* questions: polka dots in the brand pinks and lavenders */
+.answers{background:
+  radial-gradient(circle,rgba(252,115,177,.20) 0 7px,transparent 7.5px) 0 0/64px 64px,
+  radial-gradient(circle,rgba(164,123,235,.20) 0 7px,transparent 7.5px) 32px 32px/64px 64px,
+  radial-gradient(circle,rgba(253,40,141,.14) 0 2.5px,transparent 3px) 16px 48px/64px 64px,
+  var(--plum-50)}
+.answers .faq-chat,.answers .fq{position:relative}
+@media (max-width:600px){
+  .tear{height:34px}
+  .plan-blend{height:min(260px,24%)}
+  .answers{background-size:48px 48px,48px 48px,48px 48px,auto;background-position:0 0,24px 24px,12px 36px,0 0}
+}
+.tear-bottom{clip-path:inset(-40px 0 0 0)}
+.tear-top{clip-path:inset(0 0 -40px 0)}
+.answers{background:
+  radial-gradient(circle,rgba(252,115,177,.15) 0 7px,transparent 7.5px) 0 0/64px 64px,
+  radial-gradient(circle,rgba(164,123,235,.15) 0 7px,transparent 7.5px) 32px 32px/64px 64px,
+  radial-gradient(circle,rgba(253,40,141,.10) 0 2.5px,transparent 3px) 16px 48px/64px 64px,
+  var(--plum-50)}
+@media (max-width:600px){.answers{background-size:48px 48px,48px 48px,48px 48px,auto;background-position:0 0,24px 24px,12px 36px,0 0}}
