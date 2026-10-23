@@ -121,7 +121,8 @@
     b.addEventListener("click", function () {
       b.dataset.pick.split(",").forEach(function (k) { setSvc(k, true); });
       toRequest(0);
-      toast(b.closest("article").querySelector("h3").textContent + " added to your request.");
+      var t = b.querySelector("b") || b.closest("article").querySelector("h3");
+      toast(t.textContent + " added to your request.");
     });
   });
 
