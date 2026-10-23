@@ -31,7 +31,9 @@
 
   function runIntro() {
     var stage = $("#intro-stage"), logo = $("#intro-logo"), tpl = $("#bfly-tpl");
-    var W = innerWidth, H = innerHeight, small = W < 700;
+    // big monitors scale the page with CSS zoom; work in the page's own pixels
+    var Z = parseFloat(getComputedStyle(document.body).zoom) || 1;
+    var W = innerWidth / Z, H = innerHeight / Z, small = W < 700;
     var cx = W / 2, cy = H / 2;
     var lw = Math.min(W * 0.8, 560), lh = lw / 2;
     var R = Math.hypot(W, H) * 0.62;
@@ -86,13 +88,13 @@
         logo.style.animation = "none";
         logo.style.opacity = "1";
         logo.style.clipPath = "none";
-        logo.style.left = from.left + "px";
-        logo.style.top = from.top + "px";
-        logo.style.width = from.width + "px";
+        logo.style.left = from.left / Z + "px";
+        logo.style.top = from.top / Z + "px";
+        logo.style.width = from.width / Z + "px";
         logo.style.transform = "none";
         logo.animate([
           { transform: "translate(0,0) scale(1)" },
-          { transform: "translate(" + (to.left - from.left) + "px," + (to.top - from.top) + "px) scale(" + (to.width / from.width) + ")" }
+          { transform: "translate(" + (to.left - from.left) / Z + "px," + (to.top - from.top) / Z + "px) scale(" + (to.width / from.width) + ")" }
         ], { duration: 780, easing: "cubic-bezier(.65,0,.25,1)", fill: "forwards" });
         setTimeout(heroGo, 320);
         setTimeout(function () { target.style.visibility = ""; intro.remove(); }, 820);

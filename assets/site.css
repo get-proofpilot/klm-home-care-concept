@@ -1113,3 +1113,141 @@ h2{font-weight:700;letter-spacing:-.015em}
   .hero-art{order:2;margin-top:28px}
   .hero-art .gem-wrap{width:64%}
 }
+
+/* ---------- big monitors: scale the whole design up instead of floating a narrow column ---------- */
+@media (min-width:1600px){body{zoom:1.1}}
+@media (min-width:1800px){body{zoom:1.22}}
+@media (min-width:2100px){body{zoom:1.36}}
+@media (min-width:2400px){body{zoom:1.55}}
+@media (min-width:3000px){body{zoom:1.85}}
+
+/* ---------- phones: same information, less crowding ---------- */
+@media (max-width:600px){
+  body{font-size:15.5px}
+  h2{font-size:clamp(1.6rem,1.2rem + 2.4vw,1.95rem);line-height:1.12}
+  .eyebrow{font-size:.68rem;margin-bottom:12px}
+  .sec-head{margin-bottom:24px}
+  .sec-sub{font-size:.98rem;margin-top:10px}
+  .care,.plan,.visit,.story,.answers,.areas,.reviews,.consult{padding-top:56px;padding-bottom:56px}
+  .plan{padding-top:72px;padding-bottom:72px}
+  .consult{padding-top:72px}
+  .edge{height:34px}
+
+  /* hero */
+  .hero-stage{padding:28px 0 64px}
+  .hero-h1{font-size:2.55rem}
+  .hero .lead{font-size:1rem;margin-top:16px}
+  .howlong{margin-top:20px}
+  .howlong-l{font-size:.88rem}
+  .hl-chip{padding:10px 10px 9px;gap:3px}
+  .hl-chip small{display:none}
+  .hl-chip b{font-size:.84rem}
+  .hl-viz{margin-bottom:4px}
+  .hero-ctas{margin-top:20px;gap:10px 18px}
+  .hero-ctas .btn{min-height:48px}
+  .hero-art{margin-top:20px}
+  .hero-art .gem-wrap{width:58%}
+  .hero-badge{padding:9px 14px 9px 9px;margin-top:-18px}
+  .hb-ico{width:36px;height:36px}
+  .hb-text b{font-size:.95rem}
+  .hero-facts{margin-top:-30px;gap:8px}
+  .fact{padding:11px 12px!important;row-gap:4px;transform:none;border-radius:16px}
+  .fact-ico{width:34px;height:34px}
+  .fact-ico .ico{width:17px;height:17px;margin-top:-4px}
+  .hero-facts dt{font-size:.6rem}
+  .hero-facts dd{font-size:.92rem}
+
+  /* services */
+  .svc-panel{padding:20px}
+  .sp-ico{width:50px;height:50px}
+  .sp-ico .ico{width:24px;height:24px;margin-top:-6px}
+  .sp-line{font-size:1rem}
+  .sp-list{gap:7px;font-size:.94rem}
+  .house-hint{font-size:.82rem}
+
+  /* planner */
+  .plan-head{margin-bottom:24px}
+  .pl-story2{padding:14px 16px;margin-bottom:20px}
+  .ps-photo{display:none}
+  .ps-copy p{font-size:.98rem}
+  .pl-steps{padding:18px;gap:20px}
+  .svc span{padding:9px 10px;font-size:.88rem;gap:8px}
+  .svc span .ico{width:22px;height:22px}
+  .days span{height:38px}
+  .pl-sheet{padding:26px 14px 0}
+  .sheet-month{font-size:1.2rem}
+  .sheet-sub{display:none}
+  .pl-sheet .cal-day{height:40px}
+  .ticket{padding:18px 14px 20px;margin:14px -14px 0}
+  .ticket p{font-size:1.05rem}
+
+  /* visit */
+  .visit-photo{max-width:300px;margin:0 auto 6px;padding:0 4% 4%}
+  .visit-photo .vp-dot{border-width:4px}
+  .visit-steps{margin-top:18px}
+  .visit-steps li{padding:14px 0;grid-template-columns:40px 1fr}
+  .visit-steps li::before{font-size:1.45rem}
+  .visit-steps h3{font-size:1.1rem}
+  .visit-steps p{font-size:.92rem}
+
+  /* story */
+  .story-copy h2{margin-bottom:14px}
+  .story-copy p{font-size:.98rem}
+  .sig{margin-top:16px!important;font-size:1.25rem!important}
+  .scrapbook{height:min(96vw,380px)}
+  .polaroid{padding:9px 9px 0}
+  .polaroid figcaption{font-size:.95rem;padding:9px 4px 11px}
+  .kelly-note{padding:10px 12px}
+  .kelly-note p{font-size:1rem;line-height:22px}
+  .story-steps{margin-top:24px;gap:12px}
+  .story-steps b{font-size:1.05rem}
+  .story-steps span{font-size:.9rem}
+  .proof li{padding:16px;gap:12px}
+  .proof .ico{width:30px;height:30px}
+  .proof h3{font-size:1rem}
+  .proof p{font-size:.88rem}
+
+  /* questions */
+  .faq-qs{gap:8px}
+  .fq{padding:10px 12px;gap:4px 12px}
+  .fq-ico{width:34px;height:34px}
+  .fq-ico .ico{width:17px;height:17px;margin-top:-4px}
+  .fq-text{font-size:.95rem}
+  .fq-short{font-size:.7rem;padding:6px 10px}
+  .chat-body{min-height:0;padding:16px 14px}
+  .bubble{font-size:.94rem;padding:10px 14px}
+
+  /* areas */
+  .city-bullets{margin-top:18px;gap:6px 16px}
+  .city-bullets li a{font-size:1rem;padding:3px 0}
+  .areas-note{font-size:.92rem;margin-top:12px}
+
+  /* reviews */
+  .rv-mock{max-width:300px;padding:18px 20px 22px;margin:0 auto 10px}
+  .rvm-stars i{width:28px;height:28px}
+  .rv-invite-copy p:not(.eyebrow){font-size:.98rem}
+
+  /* consult */
+  .consult-copy p{font-size:.98rem}
+  .next-steps{margin:20px 0 16px}
+  .next-steps li{padding-bottom:12px;align-items:center}
+  .next-steps p{display:none}
+  .next-steps li:not(:last-child)::after{top:42px}
+  .ns-ico{width:38px;height:38px}
+  .ns-ico .ico{width:18px;height:18px;margin-top:-4px}
+  .next-steps b{font-size:1rem;margin:0}
+  .consult .contact-list li{font-size:.92rem}
+  .consult-form{padding:18px;gap:14px}
+  .form-hello{gap:12px;padding-bottom:12px}
+  .form-hello .avs img{width:48px;height:48px}
+  .form-hello b{font-size:1.1rem}
+  .form-hello p{font-size:.92rem}
+
+  /* footer */
+  .foot{padding:44px 0 110px}
+  .foot-grid{gap:26px 20px}
+  .foot nav{gap:6px}
+  .foot nav a{font-size:.88rem}
+  .foot-brand img{width:150px}
+  .foot-base{margin-top:30px;font-size:.78rem}
+}
