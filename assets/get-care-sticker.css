@@ -110,7 +110,7 @@
   .st-prop-duck{top:300px}
   .st-prop-cactus{height:96px;top:auto;right:10px;bottom:auto;position:absolute}
   .st-prop-cactus{top:390px}
-  .st-left{width:100%;margin-top:-20px}
+  .st-left{width:100%;margin-top:14px}
   .st-ticket{position:relative;left:auto;top:auto;right:auto;bottom:auto;width:auto;margin-top:22px;transform:rotate(1.5deg)}
   .st-promise-row{grid-template-columns:1fr;gap:56px;margin-top:64px}
   .st-pcard:nth-child(2){margin-top:0}
