@@ -1269,3 +1269,10 @@ body{zoom:var(--z,1)}
 .head-phone .ico{width:34px;height:34px;padding:8px 8px 10px;background:var(--blush-100);clip-path:polygon(22% 4%,78% 4%,100% 38%,50% 100%,0 38%);color:var(--pink-ink);--du:#fff;transition:background-color .2s}
 .head-phone:hover .ico{background:var(--blush)}
 .head-phone span{font-weight:650;letter-spacing:.01em}
+
+/* phone and home diamonds: always lit in the Free consult pink */
+.head-phone .ico,.head-phone:hover .ico{background:linear-gradient(120deg,#EC1585 0%,var(--pink-ink) 50%,#B9095F 100%);color:#fff;--du:rgba(255,255,255,.28)}
+.head-phone:hover .ico{filter:brightness(1.08)}
+.hb-ico{background:linear-gradient(120deg,#EC1585 0%,var(--pink-ink) 50%,#B9095F 100%)}
+.hb-ico .ico{color:#fff;--du:rgba(255,255,255,.28)}
+.hb-ico .ico .ac{stroke:#FFD3E6}
